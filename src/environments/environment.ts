@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  API_URL: 'http://localhost:3100',
+  CLIENT_ID: 'kevent_client',
+  CLIENT_SECRET: 'secret'
 };
 
 /*
