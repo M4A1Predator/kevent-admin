@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import { LoginForm } from './login-form.model'
+import { HttpClient } from '@angular/common/http';
+import { LoginForm } from './login-form.model';
 import { environment } from 'src/environments/environment';
+import { async } from 'q';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthServiceService {
+export class AuthService {
 
   constructor(private store: Store<any>,private http:HttpClient) { }
 
   isAuthenticated() {
-    this.store.select('auth')
+    return this.store.select('auth')
   }
 
   login(credential: LoginForm) {

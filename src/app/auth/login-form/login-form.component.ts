@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { LoginForm } from '../shared/login-form.model';
+import { AuthService } from '../shared/auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginFormComponent implements OnInit {
 
-  credential = {}
+  credential:LoginForm = new LoginForm()
+
+  @Output()
+  login = new EventEmitter<LoginForm>()
 
   constructor() { }
 
@@ -15,7 +20,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit() {
-
+    this.login.emit(this.credential);
   }
 
 }

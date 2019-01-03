@@ -5,8 +5,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 
 // ngrx
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, MetaReducer } from '@ngrx/store';
 import { rootReducer } from './app.root-reducer';
+import { debug } from './reducer/meta-reducer'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,8 @@ import { HomeComponent } from './home/home.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { EventsPageComponent } from './events/events-page/events-page.component';
 import { EventListComponent } from './events/event-list/event-list.component';
+
+export const metaReducers: MetaReducer<any>[] = [debug];
 
 @NgModule({
   declarations: [
@@ -35,7 +38,7 @@ import { EventListComponent } from './events/event-list/event-list.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot(rootReducer),
+    StoreModule.forRoot(rootReducer, { metaReducers }),
     FormsModule,
     NgbModule
   ],

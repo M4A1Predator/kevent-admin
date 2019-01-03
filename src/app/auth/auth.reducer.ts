@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-// import { ActionTypes } from './counter.actions';
+import * as AuthActions from './auth.actions';
  
 export const initialState = {
   attemps: 0,
@@ -7,16 +7,15 @@ export const initialState = {
   data: {}
 };
  
-export function authReducer(state = initialState, action: Action) {
+export function authReducer(state = initialState, action: AuthActions.ActionsUnion) {
   switch (action.type) {
-    // case ActionTypes.Increment:
-    //   return state + 1;
- 
-    // case ActionTypes.Decrement:
-    //   return state - 1;
- 
-    // case ActionTypes.Reset:
-    //   return 0;
+    case AuthActions.ActionTypes.LoginSuccess: {
+      return {
+        ...state,
+        isAuthenticated: true,
+        data: action.payload
+      }
+    }
  
     default:
       return state;
