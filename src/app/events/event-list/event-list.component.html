@@ -1,3 +1,30 @@
-<p>
+<div>
   event-list works!
-</p>
+  {{events | json}}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          #
+        </th>
+        <th>
+          name
+        </th>
+        <th>
+          options
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event of events; index as i">
+        <td>{{i + 1}}</td>
+        <td>{{event.name}}</td>
+        <td>
+          <span class="manage-icon">
+            <fa-icon [icon]="faBook"></fa-icon>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

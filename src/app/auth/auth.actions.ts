@@ -1,7 +1,8 @@
 import { Action } from '@ngrx/store'
 
 export enum ActionTypes {
-  LoginSuccess = '[Auth] LoginSuccess'
+  LoginSuccess = '[Auth] LoginSuccess',
+  LogoutSuccess = '[Auth] LogoutSuccess'
 }
 
 export class LoginSuccess implements Action {
@@ -10,5 +11,9 @@ export class LoginSuccess implements Action {
   constructor(public payload:any){}
 }
 
-export type ActionsUnion = LoginSuccess
+export class LogoutSuccess implements Action {
+  readonly type = ActionTypes.LogoutSuccess
+}
+
+export type ActionsUnion = LoginSuccess | LogoutSuccess
 

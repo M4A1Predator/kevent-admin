@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { LogoutSuccess } from 'src/app/auth/auth.actions'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store<any>, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  logout() {
+    this.store.dispatch(new LogoutSuccess())
+    this.router.navigate(['/login'])
   }
 
 }

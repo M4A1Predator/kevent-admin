@@ -28,7 +28,6 @@ export class AuthComponent implements OnInit {
       .subscribe(data => {
         this.router.navigate([''])
       })
-
   }
 
 }

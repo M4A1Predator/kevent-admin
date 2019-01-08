@@ -16,6 +16,10 @@ export function authReducer(state = initialState, action: AuthActions.ActionsUni
         data: action.payload
       }
     }
+
+    case AuthActions.ActionTypes.LogoutSuccess: {
+      return initialState;
+    }
  
     default:
       return state;

@@ -6,8 +6,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 // ngrx
 import { StoreModule, MetaReducer } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects'
 import { rootReducer } from './app.root-reducer';
 import { debug } from './reducer/meta-reducer'
+import { AuthEffects } from './auth/auth.effects'
+import { loadData } from './storage/storage'
+
+// FA
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,8 +25,11 @@ import { HomeComponent } from './home/home.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { EventsPageComponent } from './events/events-page/events-page.component';
 import { EventListComponent } from './events/event-list/event-list.component';
+import { EventAddComponent } from './events/event-add/event-add.component';
 
 export const metaReducers: MetaReducer<any>[] = [debug];
+
+const initialState = loadData();
 
 @NgModule({
   declarations: [
@@ -32,13 +41,16 @@ export const metaReducers: MetaReducer<any>[] = [debug];
     HomeComponent,
     SidebarComponent,
     EventsPageComponent,
-    EventListComponent
+    EventListComponent,
+    EventAddComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot(rootReducer, { metaReducers }),
+    StoreModule.forRoot(rootReducer, { initialState, metaReducers }),
+    EffectsModule.forRoot([AuthEffects]),
+    FontAwesomeModule,
     FormsModule,
     NgbModule
   ],
