@@ -26,6 +26,8 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { EventsPageComponent } from './events/events-page/events-page.component';
 import { EventListComponent } from './events/event-list/event-list.component';
 import { EventAddComponent } from './events/event-add/event-add.component';
+import { EventsPanelComponent } from './events/events-panel/events-panel.component';
+import { EventPageComponent } from './events/event-page/event-page.component';
 
 export const metaReducers: MetaReducer<any>[] = [debug];
 
@@ -42,7 +44,9 @@ const initialState = loadData();
     SidebarComponent,
     EventsPageComponent,
     EventListComponent,
-    EventAddComponent
+    EventAddComponent,
+    EventsPanelComponent,
+    EventPageComponent
   ],
   imports: [
     BrowserModule,

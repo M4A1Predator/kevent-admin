@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { LoginForm } from './login-form.model';
 import { environment } from 'src/environments/environment';
 import { async } from 'q';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,9 @@ export class AuthService {
         'Authorization': `Basic ${btoa(`${environment.CLIENT_ID}:${environment.CLIENT_SECRET}`)}`
       }
     })
+  }
+
+  getAuth(): Observable<any> {
+    return this.store.select('auth')
   }
 }
