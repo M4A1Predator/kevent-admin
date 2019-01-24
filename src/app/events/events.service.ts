@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { AddEventForm } from "./shared/AddEventForm";
 import { Store } from "@ngrx/store";
-import { map, mergeMap } from 'rxjs/operators'
+import { map, mergeMap, take } from 'rxjs/operators'
 import { AuthService } from '../auth/shared/auth.service';
 import { Observable, of } from 'rxjs';
 
@@ -15,6 +15,21 @@ export class EventsService {
 
   getEvents() {
     return this.http.get(environment.API_URL + "/events");
+  }
+
+  getEventById(eventId: string) {
+    return this.authService.getAuth().pipe(mergeMap(auth => {
+      const options = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${auth.data.token_type} ${auth.data.access_token}`
+        }
+      };
+      return this.http.get(environment.API_URL + "/events/" + eventId, options)
+      // return of(data)
+    }))
+
+
   }
 
   addEvent(addEventForm: AddEventForm): Observable<Object> {

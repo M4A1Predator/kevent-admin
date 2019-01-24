@@ -20,9 +20,11 @@
         <td>{{i + 1}}</td>
         <td>{{event.name}}</td>
         <td>
-          <span class="manage-icon">
-            <fa-icon [icon]="faBook"></fa-icon>
-          </span>
+          <a [routerLink]="['/events', event.id]">
+            <span class="manage-icon">
+              <fa-icon [icon]="faBook"></fa-icon>
+            </span>
+          </a>
         </td>
       </tr>
     </tbody>
