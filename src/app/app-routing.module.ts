@@ -14,7 +14,7 @@ import { ArtistsPageComponent } from './artists/artists-page/artists-page.compon
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard] },
-  { path: 'login', component: AuthComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: 'login', component: AuthComponent, pathMatch: 'full' },
   { path: 'events', component: EventsPageComponent, pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'events/add', component: EventAddComponent, canActivate: [AuthGuard] },
   { path: 'events/:eventId', component: EventPageComponent, pathMatch: 'full', canActivate: [AuthGuard] },

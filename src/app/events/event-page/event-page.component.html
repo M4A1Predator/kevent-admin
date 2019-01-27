@@ -6,11 +6,44 @@
           <h1>{{ event.name }}</h1>
         </div>
       </div>
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-md-12">{{ event.description }}</div>
       </div>
       <div class="row">
         <div class="col-md-12">Location: {{ event.location }}</div>
+      </div> -->
+      <div class="row">
+        <div class="col-md-10">
+          <form #f="ngForm" (ngSubmit)="updateEvent(f)">
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="name" [(ngModel)]="updateEventForm.name">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">description</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="description" [(ngModel)]="updateEventForm.description">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">location</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="location" [(ngModel)]="updateEventForm.location">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Perform Time</label>
+              <div class="col-sm-10">
+                <!-- <ngb-datepicker #d></ngb-datepicker> -->
+                <!-- <input type="text" ngbDatepicker #d="ngbDatepicker" name="performTime" [(ngModel)]="updateEventForm.performTime"/> -->
+                <ngb-datepicker #dp name="performTime" [(ngModel)]="updateEventForm.performTime" (navigate)="date = $event.next"></ngb-datepicker>
+              </div>
+            </div>
+            <button class="btn btn-primary panel-btn">Submit</button>
+          </form>
+        </div>
       </div>
     </div>
   </ng-template>

@@ -63,7 +63,7 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "k-admin:build",
-            "port": 4201
+            "port": 3111
           },
           "configurations": {
             "production": {
