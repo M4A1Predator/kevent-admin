@@ -3,5 +3,5 @@ export class UpdateEventForm {
   public name: string
   public description: string
   public location: string
-  public performTime: Date
+  public performTime: string
 }

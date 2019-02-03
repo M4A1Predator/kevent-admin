@@ -1,0 +1,30 @@
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          #
+        </th>
+        <th>
+          name
+        </th>
+        <th>
+          options
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let artist of artists; index as i">
+        <td>{{ i + 1 }}</td>
+        <td>{{ artist.name }}</td>
+        <td>
+          <a [routerLink]="['/artists', artist.id]">
+            <span class="manage-icon">
+              <fa-icon [icon]="faBook"></fa-icon>
+            </span>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

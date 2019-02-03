@@ -35,10 +35,11 @@
             </div>
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">Perform Time</label>
-              <div class="col-sm-10">
-                <!-- <ngb-datepicker #d></ngb-datepicker> -->
-                <!-- <input type="text" ngbDatepicker #d="ngbDatepicker" name="performTime" [(ngModel)]="updateEventForm.performTime"/> -->
-                <ngb-datepicker #dp name="performTime" [(ngModel)]="updateEventForm.performTime" (navigate)="date = $event.next"></ngb-datepicker>
+              <div class="col-sm-5">
+                <ngb-datepicker #dp name="date" [(ngModel)]="performDate" (navigate)="date = $event.next"></ngb-datepicker>
+              </div>
+              <div class="col-sm-5">
+                <ngb-timepicker name="time" [(ngModel)]="performTime"></ngb-timepicker>
               </div>
             </div>
             <button class="btn btn-primary panel-btn">Submit</button>
