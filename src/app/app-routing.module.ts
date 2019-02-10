@@ -13,13 +13,18 @@ import { EventPageComponent } from './events/event-page/event-page.component'
 import { ArtistsPageComponent } from './artists/artists-page/artists-page.component'
 import { ArtistAddComponent } from './artists/artist-add/artist-add.component';
 import { ArtistPageComponent } from './artists/artist-page/artist-page.component';
+import { EventPageArtistsComponent } from './events/event-page/event-page-artists/event-page-artists.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'login', component: AuthComponent, pathMatch: 'full' },
   { path: 'events', component: EventsPageComponent, pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'events/add', component: EventAddComponent, canActivate: [AuthGuard] },
-  { path: 'events/:eventId', component: EventPageComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: 'events/:eventId', component: EventPageComponent, canActivate: [AuthGuard],
+    children: [
+      { path: 'artists', component: EventPageArtistsComponent }
+    ]
+  },
   { path: 'artists', component: ArtistsPageComponent, canActivate: [AuthGuard] },
   { path: 'artists/add', component: ArtistAddComponent, canActivate: [AuthGuard] },
   { path: 'artists/:artistId', component: ArtistPageComponent, canActivate: [AuthGuard] }

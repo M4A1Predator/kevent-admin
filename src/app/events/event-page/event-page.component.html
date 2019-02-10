@@ -7,6 +7,9 @@
         </div>
       </div>
       <div class="row">
+        <app-event-page-panel></app-event-page-panel>
+      </div>
+      <div class="row">
         <div class="col-md-10">
           <form #f="ngForm" (ngSubmit)="updateEvent(f)">
             <div class="form-group row">
@@ -130,6 +133,7 @@
           </form>
         </div>
       </div>
+      <router-outlet></router-outlet>
     </div>
   </ng-template>
 </app-layout>

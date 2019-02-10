@@ -33,6 +33,8 @@ import { ArtistsPanelComponent } from './artists/artists-panel/artists-panel.com
 import { ArtistAddComponent } from './artists/artist-add/artist-add.component';
 import { ArtistsListComponent } from './artists/artists-list/artists-list.component';
 import { ArtistPageComponent } from './artists/artist-page/artist-page.component';
+import { EventPagePanelComponent } from './events/event-page/event-page-panel/event-page-panel.component';
+import { EventPageArtistsComponent } from './events/event-page/event-page-artists/event-page-artists.component';
 
 export const metaReducers: MetaReducer<any>[] = [debug];
 
@@ -56,7 +58,9 @@ const initialState = loadData();
     ArtistsPanelComponent,
     ArtistAddComponent,
     ArtistsListComponent,
-    ArtistPageComponent
+    ArtistPageComponent,
+    EventPagePanelComponent,
+    EventPageArtistsComponent
   ],
   imports: [
     BrowserModule,
