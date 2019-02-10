@@ -4,4 +4,6 @@ export class UpdateEventForm {
   public description: string
   public location: string
   public performTime: string
+  public ticketStartTime: string
+  public ticketEndTime: string
 }

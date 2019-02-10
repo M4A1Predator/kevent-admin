@@ -12,6 +12,7 @@ import { EventPageComponent } from './events/event-page/event-page.component'
 
 import { ArtistsPageComponent } from './artists/artists-page/artists-page.component'
 import { ArtistAddComponent } from './artists/artist-add/artist-add.component';
+import { ArtistPageComponent } from './artists/artist-page/artist-page.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard] },
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'events/add', component: EventAddComponent, canActivate: [AuthGuard] },
   { path: 'events/:eventId', component: EventPageComponent, pathMatch: 'full', canActivate: [AuthGuard] },
   { path: 'artists', component: ArtistsPageComponent, canActivate: [AuthGuard] },
-  { path: 'artists/add', component: ArtistAddComponent, canActivate: [AuthGuard] }
+  { path: 'artists/add', component: ArtistAddComponent, canActivate: [AuthGuard] },
+  { path: 'artists/:artistId', component: ArtistPageComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

@@ -6,43 +6,127 @@
           <h1>{{ event.name }}</h1>
         </div>
       </div>
-      <!-- <div class="row">
-        <div class="col-md-12">{{ event.description }}</div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">Location: {{ event.location }}</div>
-      </div> -->
       <div class="row">
         <div class="col-md-10">
           <form #f="ngForm" (ngSubmit)="updateEvent(f)">
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">name</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="name" [(ngModel)]="updateEventForm.name">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="name"
+                  [(ngModel)]="updateEventForm.name"
+                />
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">description</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="description" [(ngModel)]="updateEventForm.description">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="description"
+                  [(ngModel)]="updateEventForm.description"
+                />
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">location</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" name="location" [(ngModel)]="updateEventForm.location">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="location"
+                  [(ngModel)]="updateEventForm.location"
+                />
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Perform Time</label>
-              <div class="col-sm-5">
-                <ngb-datepicker #dp name="date" [(ngModel)]="performDate" (navigate)="date = $event.next"></ngb-datepicker>
+              <label class="col-sm-2 col-form-label d-flex align-items-center">Perform Time</label>
+              <div class="col-md-4 d-flex align-items-center">
+                <div class="input-group">
+                  <input
+                    class="form-control"
+                    placeholder="yyyy-mm-dd"
+                    name="date"
+                    [(ngModel)]="performDate"
+                    ngbDatepicker
+                    #d="ngbDatepicker"
+                  />
+                  <div class="input-group-append">
+                    <button
+                      class="btn btn-outline-secondary calendar"
+                      (click)="d.toggle()"
+                      type="button"
+                    ></button>
+                  </div>
+                </div>
               </div>
-              <div class="col-sm-5">
-                <ngb-timepicker name="time" [(ngModel)]="performTime"></ngb-timepicker>
+              <div class="col-sm-5 d-flex align-items-center">
+                <ngb-timepicker
+                  name="time"
+                  [(ngModel)]="performTime"
+                ></ngb-timepicker>
               </div>
             </div>
-            <button class="btn btn-primary panel-btn">Submit</button>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label d-flex align-items-center">Ticket Start</label>
+              <div class="col-md-4 d-flex align-items-center">
+                <div class="input-group">
+                  <input
+                    class="form-control"
+                    placeholder="yyyy-mm-dd"
+                    name="ticketStartDate"
+                    [(ngModel)]="ticketStartDate"
+                    ngbDatepicker
+                    #d2="ngbDatepicker"
+                  />
+                  <div class="input-group-append">
+                    <button
+                      class="btn btn-outline-secondary calendar"
+                      (click)="d2.toggle()"
+                      type="button"
+                    ></button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-5 d-flex align-items-center">
+                <ngb-timepicker
+                  name="ticketStartTime"
+                  [(ngModel)]="ticketStartTime"
+                ></ngb-timepicker>
+              </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label d-flex align-items-center">Ticket End</label>
+                <div class="col-md-4 d-flex align-items-center">
+                  <div class="input-group">
+                    <input
+                      class="form-control"
+                      placeholder="yyyy-mm-dd"
+                      name="ticketEndDate"
+                      [(ngModel)]="ticketEndDate"
+                      ngbDatepicker
+                      #d3="ngbDatepicker"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-outline-secondary calendar"
+                        (click)="d3.toggle()"
+                        type="button"
+                      ></button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-5 d-flex align-items-center">
+                  <ngb-timepicker
+                    name="ticketEndTime"
+                    [(ngModel)]="ticketEndTime"
+                  ></ngb-timepicker>
+                </div>
+              </div>
+            <button class="btn btn-primary panel-btn">Save</button>
           </form>
         </div>
       </div>
