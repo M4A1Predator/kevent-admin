@@ -28,6 +28,7 @@ const routes: Routes = [
   { path: 'artists', component: ArtistsPageComponent, canActivate: [AuthGuard] },
   { path: 'artists/add', component: ArtistAddComponent, canActivate: [AuthGuard] },
   { path: 'artists/:artistId', component: ArtistPageComponent, canActivate: [AuthGuard] }
+  // { path: 'configs', loadChildren: './kconfig/kconfig.module#KConfigModule' }
 ];
 
 @NgModule({

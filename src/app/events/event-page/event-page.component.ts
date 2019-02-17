@@ -60,6 +60,10 @@ export class EventPageComponent implements OnInit {
       const ticksetStartDateStruct: NgbDateStruct = this.myDateService.fromModel(this.updateEventForm.ticketStartTime)
       this.ticketStartDate = ticksetStartDateStruct;
       this.ticketStartTime = this.myTimeService.fromModel(this.updateEventForm.ticketStartTime)
+
+      const ticksetEndDateStruct: NgbDateStruct = this.myDateService.fromModel(this.updateEventForm.ticketEndTime)
+      this.ticketEndDate = ticksetEndDateStruct;
+      this.ticketEndTime = this.myTimeService.fromModel(this.updateEventForm.ticketEndTime)
     });
   }
 

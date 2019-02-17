@@ -35,6 +35,7 @@ import { ArtistsListComponent } from './artists/artists-list/artists-list.compon
 import { ArtistPageComponent } from './artists/artist-page/artist-page.component';
 import { EventPagePanelComponent } from './events/event-page/event-page-panel/event-page-panel.component';
 import { EventPageArtistsComponent } from './events/event-page/event-page-artists/event-page-artists.component';
+import { KConfigModule } from './kconfig/kconfig.module';
 
 export const metaReducers: MetaReducer<any>[] = [debug];
 
@@ -70,7 +71,8 @@ const initialState = loadData();
     EffectsModule.forRoot([AuthEffects]),
     FontAwesomeModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    KConfigModule
   ],
   providers: [],
   bootstrap: [AppComponent]
