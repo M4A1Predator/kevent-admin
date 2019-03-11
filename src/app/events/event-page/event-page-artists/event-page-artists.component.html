@@ -1,3 +1,25 @@
-<p>
-  event-page-artists works!
-</p>
+<ng-template [ngIf]="event">
+  <div class="row">
+    <div class="col-md-12">
+      <app-event-add-artist (onAdd)="addArtist($event)"></app-event-add-artist>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <th>#</th>
+          <th>Name</th>
+          <th>Note</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ea of eventArtists; index as i">
+            <td>{{i + 1}}</td>
+            <td>{{ea.artist.name}}</td>
+            <td>{{ea.note}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ng-template>

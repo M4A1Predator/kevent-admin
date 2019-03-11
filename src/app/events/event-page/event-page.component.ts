@@ -9,6 +9,7 @@ import { UtilsServiceService } from 'src/app/utils/utils-service.service';
 import * as moment from 'moment'
 import { MyDateService } from 'src/app/utils/MyDateService';
 import { MyTimeService } from 'src/app/utils/MyTimeService';
+import { EventPageArtistsComponent } from './event-page-artists/event-page-artists.component';
 
 @Component({
   selector: 'app-event-page',
@@ -51,49 +52,6 @@ export class EventPageComponent implements OnInit {
       Object.assign(this.event, data)
       this.updateEventForm = new UpdateEventForm()
       Object.assign(this.updateEventForm, data)
-      
-      // set date time fields
-      const performDateStruct: NgbDateStruct = this.myDateService.fromModel(this.updateEventForm.performTime)
-      this.performDate = performDateStruct;
-      this.performTime = this.myTimeService.fromModel(this.updateEventForm.performTime)
-
-      const ticksetStartDateStruct: NgbDateStruct = this.myDateService.fromModel(this.updateEventForm.ticketStartTime)
-      this.ticketStartDate = ticksetStartDateStruct;
-      this.ticketStartTime = this.myTimeService.fromModel(this.updateEventForm.ticketStartTime)
-
-      const ticksetEndDateStruct: NgbDateStruct = this.myDateService.fromModel(this.updateEventForm.ticketEndTime)
-      this.ticketEndDate = ticksetEndDateStruct;
-      this.ticketEndTime = this.myTimeService.fromModel(this.updateEventForm.ticketEndTime)
     });
   }
-
-  updateEvent(f: NgForm) {
-    this.updateEventForm.name = f.value.name
-    this.updateEventForm.description = f.value.description
-    this.updateEventForm.location = f.value.location
-
-    try {
-      const performTimeText = this.utilsService.getDateTimeString(f.value.date, f.value.time)
-      const performTime = moment(performTimeText, 'YYYY-MM-DD:hh-mm')
-      this.updateEventForm.performTime = performTime.toISOString();
-
-      const ticketStartTimeText = this.utilsService.getDateTimeString(f.value.ticketStartDate, f.value.ticketStartTime)
-      const ticketStartTime = moment(ticketStartTimeText, 'YYYY-MM-DD:hh-mm')
-      this.updateEventForm.ticketStartTime = ticketStartTime.toISOString();
-
-      const ticksetEndTimeText = this.utilsService.getDateTimeString(f.value.ticketEndDate, f.value.ticketEndTime)
-      const ticksetEndTime = moment(ticksetEndTimeText, 'YYYY-MM-DD:hh-mm')
-      this.updateEventForm.ticketEndTime = ticksetEndTime.toISOString(); 
-    } catch (error) { 
-      console.error(error);
-    }
-    
-    this.eventsService.updateEvent(this.eventId, this.updateEventForm).subscribe(data => {
-      this.getEvent();
-    },
-    err => {
-      console.error(err);
-    })
-  }
-
 }

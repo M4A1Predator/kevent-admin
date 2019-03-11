@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { EventModel } from '../../shared/EventModel';
+import { Artist } from 'src/app/artists/shared/Artist';
 
 @Component({
   selector: 'app-event-page-artists',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventPageArtistsComponent implements OnInit {
 
+  @Input()
+  event: EventModel
+  eventArtists: any[]
+
   constructor() { }
 
   ngOnInit() {
+    this.eventArtists = this.event["eventArtists"]
+  }
+
+  addArtist(artist: Artist) {
+    const ea = {
+      note: null,
+      artist
+    }
+    this.eventArtists.push(ea)
   }
 
 }
