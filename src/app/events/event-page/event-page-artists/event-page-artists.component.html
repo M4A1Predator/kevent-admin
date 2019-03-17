@@ -1,7 +1,7 @@
 <ng-template [ngIf]="event">
   <div class="row">
     <div class="col-md-12">
-      <app-event-add-artist (onAdd)="addArtist($event)"></app-event-add-artist>
+      <app-event-add-artist (onAdd)="addArtist($event)" [existArtists]="existArtists"></app-event-add-artist>
     </div>
   </div>
   <div class="row">
@@ -11,15 +11,26 @@
           <th>#</th>
           <th>Name</th>
           <th>Note</th>
+          <th>Manage</th>
         </thead>
         <tbody>
           <tr *ngFor="let ea of eventArtists; index as i">
             <td>{{i + 1}}</td>
             <td>{{ea.artist.name}}</td>
             <td>{{ea.note}}</td>
+            <td>
+              <span class="btnTxt" (click)="deleteArtist(ea.artist.id)">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </span>
+            </td>
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <button class="btn btn-primary" (click)="save()">Save</button>
     </div>
   </div>
 </ng-template>

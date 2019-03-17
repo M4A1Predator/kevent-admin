@@ -4,6 +4,7 @@
   </div>
   <div class="col-md-6">
     <select class="form-control" (change)="onChange($event.target.value)">
+      <option value="">Select</option>
       <option *ngFor="let artist of artists" [value]="artist.id">{{artist.name}}</option>
     </select>
   </div>

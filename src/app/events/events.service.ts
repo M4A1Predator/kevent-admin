@@ -54,4 +54,16 @@ export class EventsService {
       return this.http.put(environment.API_URL + "/events/" + eventId, eventModel, options)
     }))
   }
+
+  updateEventArtists(eventId: Number, data: any[]) {
+    return this.authService.getAuth().pipe(mergeMap(auth => {
+      const options = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${auth.data.token_type} ${auth.data.access_token}`
+        }
+      };
+      return this.http.put(environment.API_URL + "/events/" + eventId + "/updateArtists", data, options)
+    }))
+  }
 }
