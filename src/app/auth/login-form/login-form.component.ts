@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { LoginForm } from '../shared/login-form.model';
 import { AuthService } from '../shared/auth.service';
 
@@ -10,6 +10,12 @@ import { AuthService } from '../shared/auth.service';
 export class LoginFormComponent implements OnInit {
 
   credential:LoginForm = new LoginForm()
+
+  @Input()
+  private isLoading: Boolean = false;
+
+  @Input()
+  errMsg: String = "";
 
   @Output()
   login = new EventEmitter<LoginForm>()

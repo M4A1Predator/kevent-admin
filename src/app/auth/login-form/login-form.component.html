@@ -29,7 +29,16 @@
     <input type="checkbox" class="form-check-input" id="exampleCheck1" />
     <label class="form-check-label" for="exampleCheck1">Check me out</label>
   </div>
-  <button type="submit" class="btn btn-primary">
-    Submit
-  </button>
+  <ng-template [ngIf]="isLoading" [ngIfElse]="enableBtn">
+    <button type="submit" class="btn btn-primary" disabled>
+      Submit
+    </button>
+  </ng-template>
+  <ng-template #enableBtn>
+    <button type="submit" class="btn btn-primary">
+      Submit
+    </button>
+  </ng-template>
+  <div>{{errMsg}}</div>
+
 </form>

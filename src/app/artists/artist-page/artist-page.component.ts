@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Artist } from '../shared/Artist';
 import { NgForm } from '@angular/forms';
 import { UpdateArtistForm } from '../shared/UpdateArtistForm';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-artist-page',
@@ -15,6 +16,8 @@ export class ArtistPageComponent implements OnInit {
   artistId: Number = null
   artist: Artist = null
   artistUpdate: Artist = new Artist()
+  isUpdating: Boolean = false
+  errMsg: String = "";
 
   constructor(private route: ActivatedRoute,
     private artistsService: ArtistsService
@@ -40,9 +43,15 @@ export class ArtistPageComponent implements OnInit {
     artistForm.name = f.value.name
     artistForm.detail = f.value.detail
 
+    this.isUpdating = true
+
     this.artistsService.updateArtist(this.artistId, artistForm).subscribe(resData => {
       this.artist = resData;
       Object.assign(this.artistUpdate, this.artist)
+      this.isUpdating = false
+    }, (err: HttpErrorResponse) => {
+      console.error(err);
+      this.errMsg = "Cannot update"
     })
   }
 

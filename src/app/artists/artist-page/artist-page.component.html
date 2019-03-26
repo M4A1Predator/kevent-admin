@@ -30,7 +30,12 @@
               />
             </div>
           </div>
-          <button class="btn btn-primary panel-btn">Submit</button>
+          <ng-template [ngIf]="isUpdating" [ngIfElse]="enableBtn">
+            <button class="btn btn-primary panel-btn" disabled>Submit</button>
+          </ng-template>
+          <ng-template #enableBtn>
+            <button class="btn btn-primary panel-btn">Submit</button>
+          </ng-template>
         </form>
       </div>
     </ng-template>
