@@ -2,6 +2,27 @@
 <div class="row">
   <div class="col-md-10">
     <form #f="ngForm" (ngSubmit)="updateEvent(f)">
+      <div class="row" *ngIf="coverUrl">
+        <div class="cover">
+          <img class="cover-img" [src]="coverUrl" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">cover</label>
+        <div class="col-sm-5">
+          <input 
+            type="file" 
+            class="form-control-file" 
+            #imageInput
+            accept="image/*"
+            (change)="uploadCover(imageInput)"
+          />
+        </div>
+        <div class="col-sm-5">
+            <button class="btn btn-info" type="button" (click)="onClickUpload()">Upload</button>
+            <!-- <img [src]="coverUrl" *ngIf="coverUrl"> -->
+        </div>
+      </div>
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">name</label>
         <div class="col-sm-10">

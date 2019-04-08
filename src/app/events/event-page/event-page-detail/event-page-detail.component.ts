@@ -9,6 +9,7 @@ import { UtilsServiceService } from 'src/app/utils/utils-service.service';
 import { MyDateService } from 'src/app/utils/MyDateService';
 import { MyTimeService } from 'src/app/utils/MyTimeService';
 import { NgForm } from '@angular/forms';
+import { ImageSnippet } from '../../shared/ImageSnippet';
 
 @Component({
   selector: 'app-event-page-detail',
@@ -27,6 +28,9 @@ export class EventPageDetailComponent implements OnInit {
   ticketStartTime: NgbTimeStruct
   ticketEndDate: NgbDateStruct
   ticketEndTime: NgbTimeStruct
+  coverUrl: any
+
+  private selectedFile: ImageSnippet
 
   @Output()
   onUpdated: EventEmitter<any> = new EventEmitter<any>()
@@ -46,6 +50,8 @@ export class EventPageDetailComponent implements OnInit {
       this.eventId = params.get('eventId')
       this.getEvent();
     })
+
+    this.coverUrl = ""
   }
 
   getEvent() {
@@ -64,6 +70,15 @@ export class EventPageDetailComponent implements OnInit {
     const ticksetEndDateStruct: NgbDateStruct = this.myDateService.fromModel(this.updateEventForm.ticketEndTime)
     this.ticketEndDate = ticksetEndDateStruct;
     this.ticketEndTime = this.myTimeService.fromModel(this.updateEventForm.ticketEndTime)
+
+    if (this.event["coverPath"]) {
+      this.eventsService.getCover(this.event.id).subscribe((res) => {
+        let reader = new FileReader();
+        this.utilsService.createImageFromBlob(res).subscribe(t => {
+          this.coverUrl = t
+        })
+      })
+    }
   }
 
   updateEvent(f: NgForm) {
@@ -94,6 +109,22 @@ export class EventPageDetailComponent implements OnInit {
     err => {
       console.error(err);
     })
+  }
+
+  uploadCover(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+      this.coverUrl = reader.result
+    });
+
+    reader.readAsDataURL(file);
+  }
+
+  onClickUpload() {
+    this.eventsService.uploadCover(this.event.id, this.selectedFile.file).subscribe(res => {})
   }
 
 }

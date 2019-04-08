@@ -66,4 +66,32 @@ export class EventsService {
       return this.http.put(environment.API_URL + "/events/" + eventId + "/updateArtists", data, options)
     }))
   }
+
+  uploadCover(eventId: Number, image: File) {
+    return this.authService.getAuth().pipe(mergeMap(auth => {
+      const formData = new FormData();
+      formData.append('cover', image);
+
+      const options = {
+        headers: {
+          Authorization: `${auth.data.token_type} ${auth.data.access_token}`
+        }
+      };
+
+      return this.http.put(`${environment.API_URL}/events/${eventId}/cover`, formData, options);
+    }))
+  }
+
+  getCover(eventId: Number) {
+    return this.authService.getAuth().pipe(mergeMap(auth => {
+      const options = {
+        headers: {
+          Authorization: `${auth.data.token_type} ${auth.data.access_token}`
+        },
+        responseType: 'blob' as 'json',
+      };
+
+      return this.http.get<Blob>(`${environment.API_URL}/events/${eventId}/cover`, options);
+    }))
+  }
 }
