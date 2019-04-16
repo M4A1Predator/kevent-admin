@@ -32,6 +32,8 @@ export class EventPageDetailComponent implements OnInit {
 
   private selectedFile: ImageSnippet
 
+  errorMsg: string
+
   @Output()
   onUpdated: EventEmitter<any> = new EventEmitter<any>()
 
@@ -87,27 +89,41 @@ export class EventPageDetailComponent implements OnInit {
     this.updateEventForm.location = f.value.location
 
     try {
-      const performTimeText = this.utilsService.getDateTimeString(f.value.date, f.value.time)
-      const performTime = moment(performTimeText, 'YYYY-MM-DD:hh-mm')
-      this.updateEventForm.performTime = performTime.toISOString();
+      if (f.value.date) {
+        const performTimeText = this.utilsService.getDateTimeString(f.value.date, f.value.time)
+        const performTime = moment(performTimeText, 'YYYY-MM-DD:hh-mm')
+        this.updateEventForm.performTime = performTime.toISOString();
+      } else {
+        this.updateEventForm.performTime = null
+      }
 
-      const ticketStartTimeText = this.utilsService.getDateTimeString(f.value.ticketStartDate, f.value.ticketStartTime)
-      const ticketStartTime = moment(ticketStartTimeText, 'YYYY-MM-DD:hh-mm')
-      this.updateEventForm.ticketStartTime = ticketStartTime.toISOString();
+      if (f.value.ticketStartDate) {
+        const ticketStartTimeText = this.utilsService.getDateTimeString(f.value.ticketStartDate, f.value.ticketStartTime)
+        const ticketStartTime = moment(ticketStartTimeText, 'YYYY-MM-DD:hh-mm')
+        this.updateEventForm.ticketStartTime = ticketStartTime.toISOString();
+      } else {
+        this.updateEventForm.ticketStartTime = null
+      }
 
-      const ticksetEndTimeText = this.utilsService.getDateTimeString(f.value.ticketEndDate, f.value.ticketEndTime)
-      const ticksetEndTime = moment(ticksetEndTimeText, 'YYYY-MM-DD:hh-mm')
-      this.updateEventForm.ticketEndTime = ticksetEndTime.toISOString(); 
-    } catch (error) { 
-      console.error(error);
-    }
+      if (f.value.ticketEndDate) {
+        const ticksetEndTimeText = this.utilsService.getDateTimeString(f.value.ticketEndDate, f.value.ticketEndTime)
+        const ticksetEndTime = moment(ticksetEndTimeText, 'YYYY-MM-DD:hh-mm')
+        this.updateEventForm.ticketEndTime = ticksetEndTime.toISOString(); 
+      } else {
+        this.updateEventForm.ticketEndTime = null
+      }
     
+    } catch (error) { 
+      this.errorMsg = "Cannot save"
+    }
+
     this.eventsService.updateEvent(this.eventId, this.updateEventForm).subscribe(data => {
       // this.getEvent();
       this.onUpdated.emit()
     },
     err => {
       console.error(err);
+      this.errorMsg = "Cannot save"
     })
   }
 

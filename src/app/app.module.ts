@@ -38,6 +38,7 @@ import { EventPageArtistsComponent } from './events/event-page/event-page-artist
 import { KConfigModule } from './kconfig/kconfig.module';
 import { EventPageDetailComponent } from './events/event-page/event-page-detail/event-page-detail.component';
 import { EventAddArtistComponent } from './events/event-page/event-add-artist/event-add-artist.component';
+import { EventPageDangerComponent } from './events/event-page/event-page-danger/event-page-danger.component';
 
 export const metaReducers: MetaReducer<any>[] = [debug];
 
@@ -65,7 +66,8 @@ const initialState = loadData();
     EventPagePanelComponent,
     EventPageArtistsComponent,
     EventPageDetailComponent,
-    EventAddArtistComponent
+    EventAddArtistComponent,
+    EventPageDangerComponent
   ],
   imports: [
     BrowserModule,

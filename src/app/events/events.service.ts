@@ -94,4 +94,16 @@ export class EventsService {
       return this.http.get<Blob>(`${environment.API_URL}/events/${eventId}/cover`, options);
     }))
   }
+
+  deleteEvent(eventId: Number) {
+    return this.authService.getAuth().pipe(mergeMap(auth => {
+      const options = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${auth.data.token_type} ${auth.data.access_token}`
+        }
+      };
+      return this.http.delete(environment.API_URL + "/events/" + eventId, options)
+    })) 
+  }
 }
