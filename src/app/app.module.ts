@@ -43,6 +43,7 @@ import { EventPageDangerComponent } from './events/event-page/event-page-danger/
 export const metaReducers: MetaReducer<any>[] = [debug];
 
 const initialState = loadData();
+console.log('1');
 
 @NgModule({
   declarations: [

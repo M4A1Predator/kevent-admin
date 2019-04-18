@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { LoginForm } from './login-form.model';
 import { environment } from 'src/environments/environment';
 import { async } from 'q';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,22 @@ export class AuthService {
 
   getAuth(): Observable<any> {
     return this.store.select('auth')
+  }
+
+  verifyToken(): Observable<any> {
+    return this.store.select('auth').pipe(mergeMap(
+      auth => {
+        if(auth.isAuthenticated === true) {
+          const options = {
+              headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${auth.data.access_token}`
+            }
+          }
+          return this.http.post(`${environment.API_URL}/auth/verify`, {}, options)
+        }
+        return of(null)
+      }
+    ))
   }
 }
