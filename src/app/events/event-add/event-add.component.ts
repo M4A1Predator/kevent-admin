@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AddEventForm } from '../shared/AddEventForm';
 import { EventsService } from '../events.service';
-import { map } from 'rxjs/operators'
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-add',
@@ -14,7 +13,7 @@ export class EventAddComponent implements OnInit {
 
   event: AddEventForm = new AddEventForm()
 
-  constructor(private eventsServuce: EventsService) { }
+  constructor(private eventsServuce: EventsService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -25,7 +24,7 @@ export class EventAddComponent implements OnInit {
     this.event.location = f.value.location
 
     this.eventsServuce.addEvent(this.event).subscribe(data => {
-      console.log(data)
+      this.router.navigate(["/events"])
     }, err => {
       console.error(err);
     })
