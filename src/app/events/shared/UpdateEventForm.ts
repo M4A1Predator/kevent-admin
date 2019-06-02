@@ -6,4 +6,5 @@ export class UpdateEventForm {
   public performTime: string
   public ticketStartTime: string
   public ticketEndTime: string
+  public performDateTimeList: any[]
 }

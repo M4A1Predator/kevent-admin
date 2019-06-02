@@ -39,6 +39,8 @@ import { KConfigModule } from './kconfig/kconfig.module';
 import { EventPageDetailComponent } from './events/event-page/event-page-detail/event-page-detail.component';
 import { EventAddArtistComponent } from './events/event-page/event-add-artist/event-add-artist.component';
 import { EventPageDangerComponent } from './events/event-page/event-page-danger/event-page-danger.component';
+import { EditPerformTimeComponent } from './events/event-page/components/edit-perform-time/edit-perform-time.component';
+import { ArtistDetailComponent } from './artists/artist-page/artist-detail/artist-detail.component';
 
 export const metaReducers: MetaReducer<any>[] = [debug];
 
@@ -68,7 +70,9 @@ console.log('1');
     EventPageArtistsComponent,
     EventPageDetailComponent,
     EventAddArtistComponent,
-    EventPageDangerComponent
+    EventPageDangerComponent,
+    EditPerformTimeComponent,
+    ArtistDetailComponent
   ],
   imports: [
     BrowserModule,

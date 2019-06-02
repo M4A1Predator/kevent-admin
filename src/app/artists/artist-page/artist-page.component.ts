@@ -37,14 +37,26 @@ export class ArtistPageComponent implements OnInit {
     });
   }
 
-  onSubmit(f: NgForm) {
-    const artistForm: UpdateArtistForm = new UpdateArtistForm()
+  // onSubmit(f: NgForm) {
+  //   const artistForm: UpdateArtistForm = new UpdateArtistForm()
 
-    artistForm.name = f.value.name
-    artistForm.detail = f.value.detail
+  //   artistForm.name = f.value.name
+  //   artistForm.detail = f.value.detail
 
+  //   this.isUpdating = true
+
+  //   this.artistsService.updateArtist(this.artistId, artistForm).subscribe(resData => {
+  //     this.artist = resData;
+  //     Object.assign(this.artistUpdate, this.artist)
+  //     this.isUpdating = false
+  //   }, (err: HttpErrorResponse) => {
+  //     console.error(err);
+  //     this.errMsg = "Cannot update"
+  //   })
+  // }
+
+  onUpdateAritstDetail(artistForm: UpdateArtistForm) {
     this.isUpdating = true
-
     this.artistsService.updateArtist(this.artistId, artistForm).subscribe(resData => {
       this.artist = resData;
       Object.assign(this.artistUpdate, this.artist)

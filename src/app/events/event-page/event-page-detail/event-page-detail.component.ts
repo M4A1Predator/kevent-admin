@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { EventModel } from '../../shared/EventModel';
 import { UpdateEventForm } from '../../shared/UpdateEventForm';
 import { NgbDateStruct, NgbTimeStruct, NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -10,6 +10,7 @@ import { MyDateService } from 'src/app/utils/MyDateService';
 import { MyTimeService } from 'src/app/utils/MyTimeService';
 import { NgForm } from '@angular/forms';
 import { ImageSnippet } from '../../shared/ImageSnippet';
+import { EditPerformTimeComponent } from '../components/edit-perform-time/edit-perform-time.component';
 
 @Component({
   selector: 'app-event-page-detail',
@@ -36,6 +37,9 @@ export class EventPageDetailComponent implements OnInit {
 
   @Output()
   onUpdated: EventEmitter<any> = new EventEmitter<any>()
+
+  @ViewChild(EditPerformTimeComponent)
+  editTime: EditPerformTimeComponent
 
   constructor(private route: ActivatedRoute,
     private eventsService: EventsService,
@@ -87,15 +91,16 @@ export class EventPageDetailComponent implements OnInit {
     this.updateEventForm.name = f.value.name
     this.updateEventForm.description = f.value.description
     this.updateEventForm.location = f.value.location
+    this.updateEventForm.performDateTimeList = this.editTime.getResult()
 
     try {
-      if (f.value.date) {
-        const performTimeText = this.utilsService.getDateTimeString(f.value.date, f.value.time)
-        const performTime = moment(performTimeText, 'YYYY-MM-DD:hh-mm')
-        this.updateEventForm.performTime = performTime.toISOString();
-      } else {
-        this.updateEventForm.performTime = null
-      }
+      // if (f.value.date) {
+      //   const performTimeText = this.utilsService.getDateTimeString(f.value.date, f.value.time)
+      //   const performTime = moment(performTimeText, 'YYYY-MM-DD:hh-mm')
+      //   this.updateEventForm.performTime = performTime.toISOString();
+      // } else {
+      //   this.updateEventForm.performTime = null
+      // }
 
       if (f.value.ticketStartDate) {
         const ticketStartTimeText = this.utilsService.getDateTimeString(f.value.ticketStartDate, f.value.ticketStartTime)
@@ -115,8 +120,9 @@ export class EventPageDetailComponent implements OnInit {
     
     } catch (error) { 
       this.errorMsg = "Cannot save"
+      return;
     }
-
+    
     this.eventsService.updateEvent(this.eventId, this.updateEventForm).subscribe(data => {
       // this.getEvent();
       this.onUpdated.emit()
