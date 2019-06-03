@@ -94,14 +94,6 @@ export class EventPageDetailComponent implements OnInit {
     this.updateEventForm.performDateTimeList = this.editTime.getResult()
 
     try {
-      // if (f.value.date) {
-      //   const performTimeText = this.utilsService.getDateTimeString(f.value.date, f.value.time)
-      //   const performTime = moment(performTimeText, 'YYYY-MM-DD:hh-mm')
-      //   this.updateEventForm.performTime = performTime.toISOString();
-      // } else {
-      //   this.updateEventForm.performTime = null
-      // }
-
       if (f.value.ticketStartDate) {
         const ticketStartTimeText = this.utilsService.getDateTimeString(f.value.ticketStartDate, f.value.ticketStartTime)
         const ticketStartTime = moment(ticketStartTimeText, 'YYYY-MM-DD:hh-mm')

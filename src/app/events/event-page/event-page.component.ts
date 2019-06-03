@@ -50,8 +50,8 @@ export class EventPageComponent implements OnInit {
     this.eventsService.getEventById(this.eventId).subscribe(data => {
       this.event = new EventModel()
       Object.assign(this.event, data)
-      this.updateEventForm = new UpdateEventForm()
-      Object.assign(this.updateEventForm, data)
+      // this.updateEventForm = new UpdateEventForm()
+      // Object.assign(this.updateEventForm, data)
     });
   }
 }

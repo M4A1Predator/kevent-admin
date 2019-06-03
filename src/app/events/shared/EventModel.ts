@@ -5,4 +5,5 @@ export class EventModel {
   public description: string
   public location: string
   public performTime: string
+  public performDateTimeList: any[]
 }
