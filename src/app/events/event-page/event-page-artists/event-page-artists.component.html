@@ -16,10 +16,10 @@
         <tbody>
           <tr *ngFor="let ea of eventArtists; index as i">
             <td>{{i + 1}}</td>
-            <td>{{ea.artist.name}}</td>
+            <td>{{ea.name}}</td>
             <td>{{ea.note}}</td>
             <td>
-              <span class="btnTxt" (click)="deleteArtist(ea.artist.id)">
+              <span class="btnTxt" (click)="deleteArtist(ea.artistId)">
                 <fa-icon [icon]="faTrash"></fa-icon>
               </span>
             </td>

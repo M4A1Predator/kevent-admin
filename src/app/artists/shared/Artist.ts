@@ -1,5 +1,5 @@
 export class Artist {
-  public id: Number
+  public id: number
   public name: string
   public detail: string
 }

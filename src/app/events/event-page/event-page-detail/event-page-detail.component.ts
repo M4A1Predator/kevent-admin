@@ -54,10 +54,10 @@ export class EventPageDetailComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.eventId = params.get('eventId')
-      this.getEvent();
+      this.getEvent()
     })
 
-    this.coverUrl = ""
+    this.coverUrl = ''
   }
 
   getEvent() {
@@ -77,9 +77,9 @@ export class EventPageDetailComponent implements OnInit {
     this.ticketEndDate = ticksetEndDateStruct;
     this.ticketEndTime = this.myTimeService.fromModel(this.updateEventForm.ticketEndTime)
 
-    if (this.event["coverPath"]) {
+    if (this.event['coverPath']) {
       this.eventsService.getCover(this.event.id).subscribe((res) => {
-        let reader = new FileReader();
+        let reader = new FileReader()
         this.utilsService.createImageFromBlob(res).subscribe(t => {
           this.coverUrl = t
         })

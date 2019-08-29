@@ -9,7 +9,7 @@ import { Artist } from '../shared/Artist';
 })
 export class ArtistsPageComponent implements OnInit {
 
-  artists:Artist[] = []
+  artists: Artist[] = []
 
   constructor(private artistsService: ArtistsService) { }
 

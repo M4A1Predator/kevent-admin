@@ -1,6 +1,7 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
-import { ArtistsService } from 'src/app/artists/artists.service';
-import { Artist } from 'src/app/artists/shared/Artist';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges, DoCheck } from '@angular/core'
+import { ArtistsService } from 'src/app/artists/artists.service'
+import { Artist } from 'src/app/artists/shared/Artist'
+import { EventArtist } from '../../shared/EventArtist';
 
 @Component({
   selector: 'app-event-add-artist',
@@ -13,10 +14,10 @@ export class EventAddArtistComponent implements OnInit, DoCheck {
   private onAdd: EventEmitter<any> = new EventEmitter()
 
   @Input()
-  private existArtists: Artist[] = []
+  private existArtists: EventArtist[] = []
 
   private oldExistArtists: Artist[] = []
-  
+
   private artists: Artist[] = []
   private allArtists: Artist[] = []
   private placedArtist: Artist
@@ -26,27 +27,27 @@ export class EventAddArtistComponent implements OnInit, DoCheck {
   ngOnInit() {
     this.artistsService.getArtists().subscribe((data: Artist[]) => {
       this.allArtists = data
-      this.artists = this.allArtists.filter(a => !this.existArtists.find(e => e.id == a.id))
+      this.artists = this.allArtists.filter(a => !this.existArtists.find(e => e.artistId === a.id))
     })
   }
 
   ngDoCheck() {
     if (this.existArtists.length !== this.oldExistArtists.length) {
-      this.artists = this.allArtists.filter(a => !this.existArtists.find(e => e.id == a.id))
+      this.artists = this.allArtists.filter(a => !this.existArtists.find(e => e.artistId === a.id))
       this.oldExistArtists = Object.assign([], this.existArtists)
     }
   }
 
   onClickAdd() {
     if (!this.placedArtist) {
-      return;
+      return
     }
     this.onAdd.emit(this.placedArtist)
     this.placedArtist = null
   }
 
-  onChange(value) {
-    this.placedArtist = this.artists.find(a => a.id === Number.parseInt(value))
+  onChange(value: string) {
+    this.placedArtist = this.artists.find(a => a.id === Number.parseInt(value, 10))
   }
 
 }

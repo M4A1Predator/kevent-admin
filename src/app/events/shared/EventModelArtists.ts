@@ -7,5 +7,5 @@ export class EventModelArtists {
   public description: string
   public location: string
   public performTime: string
-  public eventArtists: EventArtist[]
+  public eventArtistList: EventArtist[]
 }
