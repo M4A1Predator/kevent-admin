@@ -89,9 +89,9 @@ export class EventsService {
           Authorization: `${auth.data.token_type} ${auth.data.access_token}`
         },
         responseType: 'blob' as 'json',
-      };
+      }
 
-      return this.http.get<Blob>(`${environment.API_URL}/events/${eventId}/cover`, options);
+      return this.http.get<Blob>(`${environment.API_URL}/events/${eventId}/cover`, options)
     }))
   }
 
@@ -102,8 +102,8 @@ export class EventsService {
           "Content-Type": "application/json",
           Authorization: `${auth.data.token_type} ${auth.data.access_token}`
         }
-      };
+      }
       return this.http.delete(environment.API_URL + "/events/" + eventId, options)
-    })) 
+    }))
   }
 }

@@ -16,15 +16,12 @@ export class EventPageArtistsComponent implements OnInit {
   @Input()
   event: EventModelArtists
   eventArtists: EventArtist[]
-  existArtists: EventArtist[] = []
   faTrash = faTrash
 
   constructor(private eventsService: EventsService) { }
 
   ngOnInit() {
     this.eventArtists = this.event.eventArtistList
-    // this.existArtists = this.event.eventArtistList.map((m: EventArtist) => m.artist)
-    this.existArtists = this.event.eventArtistList
   }
 
   addArtist(artist: Artist) {
@@ -35,12 +32,10 @@ export class EventPageArtistsComponent implements OnInit {
       detail: artist.detail
     }
     this.eventArtists.push(ea)
-    // this.existArtists.push(ea.artist)
   }
 
   deleteArtist(artistId) {
     this.eventArtists = this.eventArtists.filter(ea => ea.artistId !== artistId)
-    this.existArtists = this.existArtists.filter(a => a.artistId !== artistId)
   }
 
   save() {

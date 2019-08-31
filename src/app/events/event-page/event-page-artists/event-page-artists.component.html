@@ -1,7 +1,7 @@
 <ng-template [ngIf]="event">
   <div class="row">
     <div class="col-md-12">
-      <app-event-add-artist (onAdd)="addArtist($event)" [existArtists]="existArtists"></app-event-add-artist>
+      <app-event-add-artist (onAdd)="addArtist($event)" [existArtists]="eventArtists"></app-event-add-artist>
     </div>
   </div>
   <div class="row">

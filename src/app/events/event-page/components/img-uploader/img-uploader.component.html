@@ -1,0 +1,24 @@
+<div>
+  <div *ngIf="imgPreview; else temImgSrc">
+    <img class="img-preview" src="{{imgPreview}}" />
+  </div>
+  <ng-template #temImgSrc>
+    <div *ngIf="imgSrc; else temPathImg">
+      <img class="img-preview" src="{{imgSrc}}" />
+    </div>
+  </ng-template>
+  <ng-template #temPathImg>
+    <div *ngIf="imgPath; else temUnknown">
+      <img class="img-preview" src="{{imgPath}}" />
+    </div>
+  </ng-template>
+  <ng-template #temUnknown>
+    <div>
+      <img class="img-preview" src="/assets/mockimg.jpg" />
+    </div>
+  </ng-template>
+  <div>
+    <input #imageInput type="file" name="{{fieldName}}" (change)="onChange($event)" />
+    <button class="btn btn-sm btn-info" (click)=onUpload($event)>Upload</button>
+  </div>
+</div>

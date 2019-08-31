@@ -14,17 +14,17 @@ export class UtilsServiceService {
     return `${date.year}-${date.month}-${date.day}:${time.hour}-${time.minute}`
   }
 
-  createImageFromBlob(image: Blob) {
-    let reader = new FileReader();
+  createImageFromBlob(image: Blob): Observable<any> {
+    const reader = new FileReader()
     return new Observable(observable => {
-      let arrBuf = null
-      reader.addEventListener("load", () => {
-        arrBuf = reader.result;
+      let arrBuf: ArrayBuffer = null
+      reader.addEventListener('load', () => {
+        arrBuf = reader.result as ArrayBuffer
         observable.next(arrBuf)
-      }, false);
+      }, false)
 
       if (image) {
-        reader.readAsDataURL(image);
+        reader.readAsDataURL(image)
       }
     }).pipe(mergeMap(v => {
       return of(v)

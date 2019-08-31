@@ -29,7 +29,7 @@ export class EventPageDetailComponent implements OnInit {
   ticketStartTime: NgbTimeStruct
   ticketEndDate: NgbDateStruct
   ticketEndTime: NgbTimeStruct
-  coverUrl: any
+  coverSrc: ArrayBuffer
 
   private selectedFile: ImageSnippet
 
@@ -47,8 +47,8 @@ export class EventPageDetailComponent implements OnInit {
     private myDateService: MyDateService,
     private myTimeService: MyTimeService,
     private timeConfig: NgbTimepickerConfig) {
-      timeConfig.seconds = false;
-      timeConfig.spinners = false;
+      timeConfig.seconds = false
+      timeConfig.spinners = false
   }
 
   ngOnInit() {
@@ -57,7 +57,7 @@ export class EventPageDetailComponent implements OnInit {
       this.getEvent()
     })
 
-    this.coverUrl = ''
+    this.coverSrc = null
   }
 
   getEvent() {
@@ -81,7 +81,7 @@ export class EventPageDetailComponent implements OnInit {
       this.eventsService.getCover(this.event.id).subscribe((res) => {
         let reader = new FileReader()
         this.utilsService.createImageFromBlob(res).subscribe(t => {
-          this.coverUrl = t
+          this.coverSrc = t
         })
       })
     }
@@ -109,36 +109,40 @@ export class EventPageDetailComponent implements OnInit {
       } else {
         this.updateEventForm.ticketEndTime = null
       }
-    
-    } catch (error) { 
-      this.errorMsg = "Cannot save"
-      return;
+
+    } catch (error) {
+      this.errorMsg = 'Cannot save'
+      return
     }
-    
+
     this.eventsService.updateEvent(this.eventId, this.updateEventForm).subscribe(data => {
       // this.getEvent();
       this.onUpdated.emit()
     },
     err => {
-      console.error(err);
-      this.errorMsg = "Cannot save"
+      console.error(err)
+      this.errorMsg = 'Cannot save'
     })
   }
 
   uploadCover(imageInput: any) {
-    const file: File = imageInput.files[0];
-    const reader = new FileReader();
+    const file: File = imageInput.files[0]
+    const reader = new FileReader()
 
     reader.addEventListener('load', (event: any) => {
-      this.selectedFile = new ImageSnippet(event.target.result, file);
-      this.coverUrl = reader.result
-    });
+      this.selectedFile = new ImageSnippet(event.target.result, file)
+      this.coverSrc = reader.result as ArrayBuffer
+    })
 
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(file)
   }
 
   onClickUpload() {
     this.eventsService.uploadCover(this.event.id, this.selectedFile.file).subscribe(res => {})
+  }
+
+  onUploadCover(file: File) {
+    this.eventsService.uploadCover(this.event.id, file).subscribe(res => {})
   }
 
 }
