@@ -1,16 +1,16 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { EventModel } from '../../shared/EventModel';
-import { UpdateEventForm } from '../../shared/UpdateEventForm';
-import { NgbDateStruct, NgbTimeStruct, NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core'
+import { EventModel } from '../../shared/EventModel'
+import { UpdateEventForm } from '../../shared/UpdateEventForm'
+import { NgbDateStruct, NgbTimeStruct, NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap'
+import { ActivatedRoute } from '@angular/router'
 import * as moment from 'moment'
-import { EventsService } from '../../events.service';
-import { UtilsServiceService } from 'src/app/utils/utils-service.service';
-import { MyDateService } from 'src/app/utils/MyDateService';
-import { MyTimeService } from 'src/app/utils/MyTimeService';
-import { NgForm } from '@angular/forms';
-import { ImageSnippet } from '../../shared/ImageSnippet';
-import { EditPerformTimeComponent } from '../components/edit-perform-time/edit-perform-time.component';
+import { EventsService } from '../../events.service'
+import { UtilsServiceService } from 'src/app/utils/utils-service.service'
+import { MyDateService } from 'src/app/utils/MyDateService'
+import { MyTimeService } from 'src/app/utils/MyTimeService'
+import { NgForm } from '@angular/forms'
+import { ImageSnippet } from '../../shared/ImageSnippet'
+import { EditPerformTimeComponent } from '../components/edit-perform-time/edit-perform-time.component'
 
 @Component({
   selector: 'app-event-page-detail',
@@ -66,20 +66,20 @@ export class EventPageDetailComponent implements OnInit {
 
     // set date time fields
     const performDateStruct: NgbDateStruct = this.myDateService.fromModel(this.updateEventForm.performTime)
-    this.performDate = performDateStruct;
+    this.performDate = performDateStruct
     this.performTime = this.myTimeService.fromModel(this.updateEventForm.performTime)
 
     const ticksetStartDateStruct: NgbDateStruct = this.myDateService.fromModel(this.updateEventForm.ticketStartTime)
-    this.ticketStartDate = ticksetStartDateStruct;
+    this.ticketStartDate = ticksetStartDateStruct
     this.ticketStartTime = this.myTimeService.fromModel(this.updateEventForm.ticketStartTime)
 
     const ticksetEndDateStruct: NgbDateStruct = this.myDateService.fromModel(this.updateEventForm.ticketEndTime)
-    this.ticketEndDate = ticksetEndDateStruct;
+    this.ticketEndDate = ticksetEndDateStruct
     this.ticketEndTime = this.myTimeService.fromModel(this.updateEventForm.ticketEndTime)
 
+    // Get cover img
     if (this.event['coverPath']) {
       this.eventsService.getCover(this.event.id).subscribe((res) => {
-        let reader = new FileReader()
         this.utilsService.createImageFromBlob(res).subscribe(t => {
           this.coverSrc = t
         })
@@ -97,7 +97,7 @@ export class EventPageDetailComponent implements OnInit {
       if (f.value.ticketStartDate) {
         const ticketStartTimeText = this.utilsService.getDateTimeString(f.value.ticketStartDate, f.value.ticketStartTime)
         const ticketStartTime = moment(ticketStartTimeText, 'YYYY-MM-DD:hh-mm')
-        this.updateEventForm.ticketStartTime = ticketStartTime.toISOString();
+        this.updateEventForm.ticketStartTime = ticketStartTime.toISOString()
       } else {
         this.updateEventForm.ticketStartTime = null
       }
@@ -105,7 +105,7 @@ export class EventPageDetailComponent implements OnInit {
       if (f.value.ticketEndDate) {
         const ticksetEndTimeText = this.utilsService.getDateTimeString(f.value.ticketEndDate, f.value.ticketEndTime)
         const ticksetEndTime = moment(ticksetEndTimeText, 'YYYY-MM-DD:hh-mm')
-        this.updateEventForm.ticketEndTime = ticksetEndTime.toISOString(); 
+        this.updateEventForm.ticketEndTime = ticksetEndTime.toISOString() 
       } else {
         this.updateEventForm.ticketEndTime = null
       }
@@ -142,7 +142,7 @@ export class EventPageDetailComponent implements OnInit {
   }
 
   onUploadCover(file: File) {
-    this.eventsService.uploadCover(this.event.id, file).subscribe(res => {})
+    this.eventsService.uploadCover(this.event.id, file).subscribe(() => {})
   }
 
 }

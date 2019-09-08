@@ -1,0 +1,21 @@
+<div class="root">
+  <form #f="ngForm" (ngSubmit)="$event.preventDefault()">
+    <div class="row">
+      <app-img-uploader [imgSrc]="coverSrc" (uploadImg)="onUploadZone($event)"></app-img-uploader>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Price</label>
+      <div class="col-sm-10">
+        <!-- <input
+          type="text"
+          class="form-control"
+          name="name"
+          [(ngModel)]="price"
+        /> -->
+        <textarea class="form-control" rows="3" [(ngModel)]="price" name="price"></textarea>
+      </div>
+    </div>
+    <button class="btn btn-primary panel-btn" type="submit" (click)="onUpdate(f)">Save</button>
+    <span *ngIf="errorMsg">{{ errorMsg }}</span>
+  </form>
+</div>

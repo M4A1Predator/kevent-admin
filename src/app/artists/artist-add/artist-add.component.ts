@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AddArtistForm } from '../shared/AddArtistForm';
-import { NgForm } from '@angular/forms';
-import { ArtistsService } from '../artists.service';
+import { Component, OnInit } from '@angular/core'
+import { AddArtistForm } from '../shared/AddArtistForm'
+import { NgForm } from '@angular/forms'
+import { ArtistsService } from '../artists.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-artist-add',
@@ -12,7 +13,7 @@ export class ArtistAddComponent implements OnInit {
 
   artist: AddArtistForm = new AddArtistForm()
 
-  constructor(private artistsService: ArtistsService) { }
+  constructor(private artistsService: ArtistsService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -23,7 +24,7 @@ export class ArtistAddComponent implements OnInit {
     }
 
     this.artistsService.addArtist(this.artist).subscribe(data => {
-      console.log(data);
+      this.router.navigate(['artists'])
     })
   }
 

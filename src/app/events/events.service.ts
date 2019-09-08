@@ -1,32 +1,33 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { environment } from "src/environments/environment";
-import { AddEventForm } from "./shared/AddEventForm";
-import { Store } from "@ngrx/store";
+import { Injectable } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
+import { environment } from 'src/environments/environment'
+import { AddEventForm } from './shared/AddEventForm'
+import { Store } from '@ngrx/store'
 import { map, mergeMap, take } from 'rxjs/operators'
-import { AuthService } from '../auth/shared/auth.service';
-import { Observable, of } from 'rxjs';
-import { EventModel } from './shared/EventModel';
+import { AuthService } from '../auth/shared/auth.service'
+import { Observable, of } from 'rxjs'
+import { EventModel } from './shared/EventModel'
+import { ZoneRequest } from './shared/zone-request'
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class EventsService {
   constructor(private http: HttpClient, private store: Store<any>, private authService: AuthService) {}
 
   getEvents() {
-    return this.http.get(environment.API_URL + "/events");
+    return this.http.get(environment.API_URL + '/events')
   }
 
   getEventById(eventId: string) {
     return this.authService.getAuth().pipe(mergeMap(auth => {
       const options = {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `${auth.data.token_type} ${auth.data.access_token}`
         }
-      };
-      return this.http.get(environment.API_URL + "/events/" + eventId, options)
+      }
+      return this.http.get(environment.API_URL + '/events/' + eventId, options)
       // return of(data)
     }))
   }
@@ -35,11 +36,11 @@ export class EventsService {
     return this.authService.getAuth().pipe(mergeMap(auth => {
       const options = {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `${auth.data.token_type} ${auth.data.access_token}`
         }
-      };
-      return this.http.post(environment.API_URL + "/events", addEventForm, options)
+      }
+      return this.http.post(environment.API_URL + '/events', addEventForm, options)
     }))
   }
 
@@ -47,11 +48,11 @@ export class EventsService {
     return this.authService.getAuth().pipe(mergeMap(auth => {
       const options = {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `${auth.data.token_type} ${auth.data.access_token}`
         }
-      };
-      return this.http.put(environment.API_URL + "/events/" + eventId, eventModel, options)
+      }
+      return this.http.put(environment.API_URL + '/events/' + eventId, eventModel, options)
     }))
   }
 
@@ -59,26 +60,26 @@ export class EventsService {
     return this.authService.getAuth().pipe(mergeMap(auth => {
       const options = {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `${auth.data.token_type} ${auth.data.access_token}`
         }
-      };
-      return this.http.put(environment.API_URL + "/events/" + eventId + "/updateArtists", data, options)
+      }
+      return this.http.put(environment.API_URL + '/events/' + eventId + '/updateArtists', data, options)
     }))
   }
 
   uploadCover(eventId: Number, image: File) {
     return this.authService.getAuth().pipe(mergeMap(auth => {
-      const formData = new FormData();
-      formData.append('cover', image);
+      const formData = new FormData()
+      formData.append('cover', image)
 
       const options = {
         headers: {
           Authorization: `${auth.data.token_type} ${auth.data.access_token}`
         }
-      };
+      }
 
-      return this.http.put(`${environment.API_URL}/events/${eventId}/cover`, formData, options);
+      return this.http.put(`${environment.API_URL}/events/${eventId}/cover`, formData, options)
     }))
   }
 
@@ -99,11 +100,33 @@ export class EventsService {
     return this.authService.getAuth().pipe(mergeMap(auth => {
       const options = {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `${auth.data.token_type} ${auth.data.access_token}`
         }
       }
-      return this.http.delete(environment.API_URL + "/events/" + eventId, options)
+      return this.http.delete(environment.API_URL + '/events/' + eventId, options)
+    }))
+  }
+
+  uploadZoneImage(eventId: number, file: File) {
+    return this.authService.getAuth().pipe(mergeMap(auth => {
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const options = {
+        headers: {
+          Authorization: `${auth.data.token_type} ${auth.data.access_token}`
+        }
+      }
+
+      return this.http.put(`${environment.API_URL}/events/${eventId}/images/zone`, formData, options)
+    }))
+  }
+
+  updateZoneDetail(eventId: number, data: ZoneRequest) {
+    return this.authService.getAuth().pipe(mergeMap(auth => {
+      const options = this.authService.getBasicHeader(auth)
+      return this.http.put(environment.API_URL + '/events/' + eventId + '/zone', data, options)
     }))
   }
 }

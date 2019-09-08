@@ -12,7 +12,7 @@ import { mergeMap } from 'rxjs/operators';
 })
 export class AuthService {
 
-  constructor(private store: Store<any>,private http:HttpClient) { }
+  constructor(private store: Store<any>, private http: HttpClient) { }
 
   isAuthenticated() {
     return this.store.select('auth')
@@ -52,5 +52,14 @@ export class AuthService {
         return of(null)
       }
     ))
+  }
+
+  getBasicHeader(auth: any) {
+    return {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${auth.data.token_type} ${auth.data.access_token}`
+      }
+    }
   }
 }

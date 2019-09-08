@@ -11,20 +11,19 @@
         <ngb-tab title="Detail">
           <ng-template ngbTabContent>
             <div class="space"></div>
-            <app-artist-detail 
-              [artist]="artist"
-              [isUpdating]="isUpdating"
-              (onUpdate)="onUpdateAritstDetail($event)"
-            >
+            <app-artist-detail [artist]="artist" [isUpdating]="isUpdating" (onUpdate)="onUpdateAritstDetail($event)">
             </app-artist-detail>
           </ng-template>
         </ngb-tab>
         <ngb-tab title="Files">
-            <ng-template ngbTabContent>
-              <div class="space"></div>
-              FILES
-            </ng-template>
-          </ngb-tab>
+          <ng-template ngbTabContent>
+            <div class="space"></div>
+            FILES
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Danger">
+          <app-artist-danger></app-artist-danger>
+        </ngb-tab>
       </ngb-tabset>
       <!-- <div class="row">
         <form #f="ngForm" (ngSubmit)="onSubmit(f)">

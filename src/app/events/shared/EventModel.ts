@@ -1,6 +1,6 @@
 
 export class EventModel {
-  public id: Number
+  public id: number
   public name: string
   public description: string
   public location: string
