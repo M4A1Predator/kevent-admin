@@ -20,6 +20,7 @@ export class EventPageZoneComponent implements OnInit {
   constructor(private eventsService: EventsService) { }
 
   ngOnInit() {
+    this.eventsService.getZoneImages(this.event.id).subscribe()
   }
 
   onUploadZone(e: File) {

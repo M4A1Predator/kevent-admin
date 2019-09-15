@@ -43,7 +43,8 @@ import { EditPerformTimeComponent } from './events/event-page/components/edit-pe
 import { ArtistDetailComponent } from './artists/artist-page/artist-detail/artist-detail.component';
 import { ImgUploaderComponent } from './events/event-page/components/img-uploader/img-uploader.component';
 import { ArtistDangerComponent } from './artists/artist-page/artist-danger/artist-danger.component';
-import { EventPageZoneComponent } from './events/event-page/event-page-zone/event-page-zone.component'
+import { EventPageZoneComponent } from './events/event-page/event-page-zone/event-page-zone.component';
+import { ArtistPageFilesComponent } from './artists/artist-page/artist-page-files/artist-page-files.component'
 
 export const metaReducers: MetaReducer<any>[] = [debug]
 
@@ -78,6 +79,7 @@ const initialState = loadData()
     ImgUploaderComponent,
     ArtistDangerComponent,
     EventPageZoneComponent,
+    ArtistPageFilesComponent,
   ],
   imports: [
     BrowserModule,

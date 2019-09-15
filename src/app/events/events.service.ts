@@ -129,4 +129,16 @@ export class EventsService {
       return this.http.put(environment.API_URL + '/events/' + eventId + '/zone', data, options)
     }))
   }
+
+  getZoneImages(eventId: number) {
+    return this.authService.getAuth().pipe(mergeMap(auth => {
+      const options = {
+        headers: {
+          Authorization: `${auth.data.token_type} ${auth.data.access_token}`
+        },
+        responseType: 'blob' as 'json',
+      }
+      return this.http.get(`${environment.API_URL}/events/${eventId}/images/zone`, options)
+    }))
+  }
 }

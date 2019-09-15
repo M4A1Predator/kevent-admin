@@ -18,11 +18,13 @@
         <ngb-tab title="Files">
           <ng-template ngbTabContent>
             <div class="space"></div>
-            FILES
+            <app-artist-page-files [artist]="artist"></app-artist-page-files>
           </ng-template>
         </ngb-tab>
         <ngb-tab title="Danger">
-          <app-artist-danger></app-artist-danger>
+          <ng-template ngbTabContent>
+            <app-artist-danger [artist]="artist"></app-artist-danger>
+          </ng-template>
         </ngb-tab>
       </ngb-tabset>
       <!-- <div class="row">
