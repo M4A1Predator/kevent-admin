@@ -6,4 +6,5 @@ export class EventModel {
   public location: string
   public performTime: string
   public performDateTimeList: any[]
+  public zoneDetail: string
 }

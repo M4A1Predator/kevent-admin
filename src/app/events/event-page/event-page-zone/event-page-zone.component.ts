@@ -3,6 +3,8 @@ import { EventsService } from '../../events.service'
 import { EventModel } from '../../shared/EventModel'
 import { ZoneRequest } from '../../shared/zone-request'
 import { HttpErrorResponse } from '@angular/common/http'
+import { flatMap } from 'rxjs/operators'
+import { UtilsServiceService } from 'src/app/utils/utils-service.service'
 
 @Component({
   selector: 'app-event-page-zone',
@@ -14,17 +16,31 @@ export class EventPageZoneComponent implements OnInit {
   @Input()
   event: EventModel
 
+  imgSrc: ArrayBuffer
+
   price: string
   errorMsg: string
+  msg: string
 
-  constructor(private eventsService: EventsService) { }
+  constructor(private eventsService: EventsService,
+    private utilsService: UtilsServiceService) { }
 
   ngOnInit() {
-    this.eventsService.getZoneImages(this.event.id).subscribe()
+    this.eventsService.getZoneImages(this.event.id).pipe(flatMap((img: Blob) => {
+      return this.utilsService.createImageFromBlob(img)
+    })).subscribe(imgSrc => {
+      this.imgSrc = imgSrc
+    })
+
+    if (this.event.zoneDetail) {
+      this.price = this.event.zoneDetail
+    }
   }
 
   onUploadZone(e: File) {
-    this.eventsService.uploadZoneImage(this.event.id, e).subscribe(() => {},
+    this.eventsService.uploadZoneImage(this.event.id, e).subscribe(() => {
+      this.msg = 'Saved'
+    },
       (err: HttpErrorResponse) => {
         this.errorMsg = err.message
       })

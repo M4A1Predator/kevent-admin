@@ -1,7 +1,10 @@
 <div class="root">
   <form #f="ngForm" (ngSubmit)="$event.preventDefault()">
     <div class="row">
-      <app-img-uploader [imgSrc]="coverSrc" (uploadImg)="onUploadZone($event)"></app-img-uploader>
+      <app-img-uploader [imgSrc]="imgSrc" (uploadImg)="onUploadZone($event)"></app-img-uploader>
+    </div>
+    <div *ngIf="msg">
+      {{msg}}
     </div>
     <div class="form-group row">
       <label class="col-sm-2 col-form-label">Price</label>

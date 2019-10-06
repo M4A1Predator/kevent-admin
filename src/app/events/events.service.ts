@@ -8,6 +8,7 @@ import { AuthService } from '../auth/shared/auth.service'
 import { Observable, of } from 'rxjs'
 import { EventModel } from './shared/EventModel'
 import { ZoneRequest } from './shared/zone-request'
+import { UpdateEventForm } from './shared/UpdateEventForm'
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +45,7 @@ export class EventsService {
     }))
   }
 
-  updateEvent(eventId: string, eventModel: EventModel) {
+  updateEvent(eventId: string, eventModel: UpdateEventForm) {
     return this.authService.getAuth().pipe(mergeMap(auth => {
       const options = {
         headers: {
