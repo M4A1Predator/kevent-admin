@@ -18,7 +18,7 @@
         <ngb-tab title="Files">
           <ng-template ngbTabContent>
             <div class="space"></div>
-            <app-artist-page-files [artist]="artist"></app-artist-page-files>
+            <app-artist-page-files [artist]="artist" (onUpdate)="onUpdateAritstDetail($event)"></app-artist-page-files>
           </ng-template>
         </ngb-tab>
         <ngb-tab title="Danger">

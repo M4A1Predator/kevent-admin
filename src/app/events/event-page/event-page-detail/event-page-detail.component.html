@@ -162,6 +162,7 @@
 
         <!-- Submit -->
         <button class="btn btn-primary panel-btn" type="submit" (click)="updateEvent(f)">Save</button>
+        <span *ngIf="isSaveSuccess">Saved Successfully</span>
         <span *ngIf="errorMsg">{{ errorMsg }}</span>
       </form>
     </div>

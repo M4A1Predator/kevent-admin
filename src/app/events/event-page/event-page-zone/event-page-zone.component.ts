@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 import { EventsService } from '../../events.service'
 import { EventModel } from '../../shared/EventModel'
 import { ZoneRequest } from '../../shared/zone-request'
@@ -15,6 +15,9 @@ export class EventPageZoneComponent implements OnInit {
 
   @Input()
   event: EventModel
+
+  @Output()
+  updated: EventEmitter<any> = new EventEmitter()
 
   imgSrc: ArrayBuffer
 
@@ -51,6 +54,7 @@ export class EventPageZoneComponent implements OnInit {
     data.priceDetail = this.price
     this.eventsService.updateZoneDetail(this.event.id, data).subscribe(() => {
       this.errorMsg = null
+      this.updated.emit()
     },
       (err: HttpErrorResponse) => {
         this.errorMsg = err.message

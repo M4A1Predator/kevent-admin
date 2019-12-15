@@ -34,6 +34,7 @@ export class EventPageDetailComponent implements OnInit {
   private selectedFile: ImageSnippet
 
   errorMsg: string
+  isSaveSuccess: boolean
 
   @Output()
   onUpdated: EventEmitter<any> = new EventEmitter<any>()
@@ -56,8 +57,6 @@ export class EventPageDetailComponent implements OnInit {
       this.eventId = params.get('eventId')
       this.getEvent()
     })
-
-    this.coverSrc = null
   }
 
   getEvent() {
@@ -78,13 +77,13 @@ export class EventPageDetailComponent implements OnInit {
     this.ticketEndTime = this.myTimeService.fromModel(this.updateEventForm.ticketEndTime)
 
     // Get cover img
-    if (this.event['coverPath']) {
-      this.eventsService.getCover(this.event.id).subscribe((res) => {
-        this.utilsService.createImageFromBlob(res).subscribe(t => {
-          this.coverSrc = t
-        })
+    // if (this.event['coverPath']) {
+    this.eventsService.getCover(this.event.id).subscribe((res) => {
+      this.utilsService.createImageFromBlob(res).subscribe(t => {
+        this.coverSrc = t
       })
-    }
+    })
+    // }
   }
 
   updateEvent(f: NgForm) {
@@ -118,6 +117,7 @@ export class EventPageDetailComponent implements OnInit {
     this.eventsService.updateEvent(this.eventId, this.updateEventForm).subscribe(data => {
       // this.getEvent();
       this.onUpdated.emit()
+      this.isSaveSuccess = true
     },
     err => {
       console.error(err)

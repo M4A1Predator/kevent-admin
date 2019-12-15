@@ -19,7 +19,7 @@
         </ngb-tab>
         <ngb-tab title="Zone">
           <ng-template ngbTabContent>
-            <app-event-page-zone [event]="event"></app-event-page-zone>
+            <app-event-page-zone [event]="event" (updated)="getEvent()"></app-event-page-zone>
           </ng-template>
         </ngb-tab>
         <ngb-tab title="Danger">

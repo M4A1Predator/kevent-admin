@@ -91,7 +91,7 @@ export class ArtistsService {
         }
       }
       const formData = new FormData()
-      formData.append('file', file)
+      formData.append('cover', file)
       return this.http.put(`${environment.API_URL}/artists/${artistId}/images/cover`, formData, options)
     }))
   }
