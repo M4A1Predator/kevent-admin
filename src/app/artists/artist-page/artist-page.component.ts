@@ -25,7 +25,7 @@ export class ArtistPageComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.artistId = Number.parseInt(params.get('artistId'))
+      this.artistId = Number.parseInt(params.get('artistId'), 10)
       this.getArtist()
     })
   }

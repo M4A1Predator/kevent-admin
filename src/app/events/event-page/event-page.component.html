@@ -14,7 +14,7 @@
         </ngb-tab>
         <ngb-tab title="Artists">
           <ng-template ngbTabContent>
-            <app-event-page-artists [event]="event"></app-event-page-artists>
+            <app-event-page-artists [event]="event" (updateEvent)="getEvent()"></app-event-page-artists>
           </ng-template>
         </ngb-tab>
         <ngb-tab title="Zone">

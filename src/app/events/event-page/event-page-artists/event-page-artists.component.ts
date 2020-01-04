@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { EventModel } from '../../shared/EventModel'
 import { Artist } from 'src/app/artists/shared/Artist'
 import { EventModelArtists } from '../../shared/EventModelArtists'
 import { EventArtist } from '../../shared/EventArtist'
 import { EventsService } from '../../events.service'
+import { HttpErrorResponse } from '@angular/common/http'
 
 @Component({
   selector: 'app-event-page-artists',
@@ -15,8 +16,14 @@ export class EventPageArtistsComponent implements OnInit {
 
   @Input()
   event: EventModelArtists
+
+  @Output()
+  updateEvent: EventEmitter<any> = new EventEmitter()
+
   eventArtists: EventArtist[]
   faTrash = faTrash
+
+  msg = ''
 
   constructor(private eventsService: EventsService) { }
 
@@ -34,7 +41,7 @@ export class EventPageArtistsComponent implements OnInit {
     this.eventArtists.push(ea)
   }
 
-  deleteArtist(artistId) {
+  deleteArtist(artistId: number) {
     this.eventArtists = this.eventArtists.filter(ea => ea.artistId !== artistId)
   }
 
@@ -46,8 +53,11 @@ export class EventPageArtistsComponent implements OnInit {
       }
     })
 
-    this.eventsService.updateEventArtists(this.event.id, data).subscribe(res => {}, err => {
-      console.error(err)
+    this.eventsService.updateEventArtists(this.event.id, data).subscribe(res => {
+      this.msg = 'saved'
+      this.updateEvent.emit()
+    }, (err: HttpErrorResponse) => {
+      this.msg = err.message
     })
   }
 
