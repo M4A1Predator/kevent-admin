@@ -1,0 +1,47 @@
+<div class="root">
+  <span><strong>Ticket Selling</strong></span>
+  <div *ngFor="let ts of ticketFormList; let i = index" class="ticket-selling-item">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label d-flex align-items-center">Method/Website</label>
+      <div class="col-sm-10">
+        <input
+          type="text"
+          class="form-control"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label d-flex align-items-center">Ticket Start</label>
+      <div class="col-md-4 d-flex align-items-center">
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd"
+            ngbDatepicker #d2="ngbDatepicker" [(ngModel)]="ticketFormList[i].ticketStartDate" />
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-5 d-flex align-items-center">
+        <ngb-timepicker [(ngModel)]="ticketFormList[i].ticketStartTime"></ngb-timepicker>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label d-flex align-items-center">Ticket End</label>
+      <div class="col-md-4 d-flex align-items-center">
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd"
+            ngbDatepicker #d3="ngbDatepicker" [(ngModel)]="ticketFormList[i].ticketEndDate"/>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="d3.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-5 d-flex align-items-center">
+        <ngb-timepicker [(ngModel)]="ticketFormList[i].ticketEndTime"></ngb-timepicker>
+      </div>
+    </div>
+  </div>
+  <div>
+    <button class="btn btn-info btn-sm" (click)="addTickSelling($event)">+</button>
+  </div>
+</div>

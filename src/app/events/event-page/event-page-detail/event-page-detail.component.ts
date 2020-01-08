@@ -11,6 +11,7 @@ import { MyTimeService } from 'src/app/utils/MyTimeService'
 import { NgForm } from '@angular/forms'
 import { ImageSnippet } from '../../shared/ImageSnippet'
 import { EditPerformTimeComponent } from '../components/edit-perform-time/edit-perform-time.component'
+import { TicketSelling } from '../../shared/ticket-selling'
 
 @Component({
   selector: 'app-event-page-detail',
@@ -30,6 +31,7 @@ export class EventPageDetailComponent implements OnInit {
   ticketEndDate: NgbDateStruct
   ticketEndTime: NgbTimeStruct
   coverSrc: ArrayBuffer
+  ticketSellingList: TicketSelling[]
 
   private selectedFile: ImageSnippet
 
