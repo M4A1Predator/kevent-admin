@@ -1,3 +1,5 @@
+import { TicketSelling } from './ticket-selling'
+
 export class UpdateEventForm {
   public id: number
   public name: string
@@ -7,4 +9,5 @@ export class UpdateEventForm {
   public ticketStartTime: string
   public ticketEndTime: string
   public performDateTimeList: any[]
+  public ticketSellingList: TicketSelling[]
 }

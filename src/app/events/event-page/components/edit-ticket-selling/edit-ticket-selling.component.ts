@@ -1,6 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { Component, OnInit, ViewChild, Input } from '@angular/core'
 import { TicketSelling, TicketSellingForm } from 'src/app/events/shared/ticket-selling'
 import { NgbTimepicker } from '@ng-bootstrap/ng-bootstrap'
+import { MyTimeService } from 'src/app/utils/MyTimeService'
+import { MyDateService } from 'src/app/utils/MyDateService'
+import { UtilsServiceService } from 'src/app/utils/utils-service.service'
+import * as moment from 'moment'
 
 @Component({
   selector: 'app-edit-ticket-selling',
@@ -9,22 +13,48 @@ import { NgbTimepicker } from '@ng-bootstrap/ng-bootstrap'
 })
 export class EditTicketSellingComponent implements OnInit {
 
+  @Input()
   ticketSellingList: TicketSelling[] = []
+
   ticketFormList: TicketSellingForm[] = []
 
   @ViewChild('tp')
   timepickers: NgbTimepicker[]
 
-  constructor() { }
+  constructor(private myDateService: MyDateService,
+    private myTimeService: MyTimeService,
+    private utilsService: UtilsServiceService) { }
 
   ngOnInit() {
+
+    this.ticketFormList = this.ticketSellingList.map((t: TicketSelling) => {
+      const tf = new TicketSellingForm()
+      tf.approach = t.approach
+      tf.note = t.note
+      // tf.ticketEndDate = this.myDateService.fromModel(t.ticketEndTime.)
+      return tf
+    })
+
     this.ticketFormList.push(new TicketSellingForm())
   }
 
   addTickSelling() {
     this.ticketFormList.push(new TicketSellingForm())
-    console.log(this.ticketFormList);
-    
+  }
+
+  getResult(): TicketSelling[] {
+    const ticketFormList = this.ticketFormList.filter(t => !!t.approach && !!t.approach.trim())
+    const dataList = ticketFormList.map(t => {
+      const ts = new TicketSelling()
+      ts.approach = t.approach
+      ts.note = t.note
+      ts.ticketStartTime = moment(this.utilsService.getDateTimeString(t.ticketStartDate, t.ticketStartTime), 'YYYY-MM-DD:hh-mm').toDate()
+      if (t.ticketEndDate && t.ticketEndDate.day && t.ticketEndDate.month) {
+        ts.ticketEndTime = moment(this.utilsService.getDateTimeString(t.ticketEndDate, t.ticketEndTime), 'YYYY-MM-DD:hh-mm').toDate()
+      }
+      return ts
+    })
+    return dataList
   }
 
 }

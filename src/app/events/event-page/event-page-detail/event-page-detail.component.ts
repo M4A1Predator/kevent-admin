@@ -12,6 +12,7 @@ import { NgForm } from '@angular/forms'
 import { ImageSnippet } from '../../shared/ImageSnippet'
 import { EditPerformTimeComponent } from '../components/edit-perform-time/edit-perform-time.component'
 import { TicketSelling } from '../../shared/ticket-selling'
+import { EditTicketSellingComponent } from '../components/edit-ticket-selling/edit-ticket-selling.component'
 
 @Component({
   selector: 'app-event-page-detail',
@@ -44,6 +45,9 @@ export class EventPageDetailComponent implements OnInit {
   @ViewChild(EditPerformTimeComponent)
   editTime: EditPerformTimeComponent
 
+  @ViewChild(EditTicketSellingComponent)
+  editTicketSelling: EditTicketSellingComponent
+
   constructor(private route: ActivatedRoute,
     private eventsService: EventsService,
     private utilsService: UtilsServiceService,
@@ -65,18 +69,31 @@ export class EventPageDetailComponent implements OnInit {
     this.updateEventForm = new UpdateEventForm()
     Object.assign(this.updateEventForm, this.event)
 
+    // set ticket selling
+    this.updateEventForm.ticketSellingList = this.event.ticketSellingList.map(t => {
+      const data = {
+        ...t,
+        ticketStartTime: new Date(t.ticketStartTime)
+      }
+      if (t.ticketEndTime) {
+        data.ticketEndTime = new Date(t.ticketEndTime)
+      }
+      return data
+    })
+    console.log(this.updateEventForm);
+
     // set date time fields
-    const performDateStruct: NgbDateStruct = this.myDateService.fromModel(this.updateEventForm.performTime)
-    this.performDate = performDateStruct
-    this.performTime = this.myTimeService.fromModel(this.updateEventForm.performTime)
+    // const performDateStruct: NgbDateStruct = this.myDateService.fromModel(this.updateEventForm.performTime)
+    // this.performDate = performDateStruct
+    // this.performTime = this.myTimeService.fromModel(this.updateEventForm.performTime)
 
-    const ticksetStartDateStruct: NgbDateStruct = this.myDateService.fromModel(this.updateEventForm.ticketStartTime)
-    this.ticketStartDate = ticksetStartDateStruct
-    this.ticketStartTime = this.myTimeService.fromModel(this.updateEventForm.ticketStartTime)
+    // const ticksetStartDateStruct: NgbDateStruct = this.myDateService.fromModel(this.updateEventForm.ticketStartTime)
+    // this.ticketStartDate = ticksetStartDateStruct
+    // this.ticketStartTime = this.myTimeService.fromModel(this.updateEventForm.ticketStartTime)
 
-    const ticksetEndDateStruct: NgbDateStruct = this.myDateService.fromModel(this.updateEventForm.ticketEndTime)
-    this.ticketEndDate = ticksetEndDateStruct
-    this.ticketEndTime = this.myTimeService.fromModel(this.updateEventForm.ticketEndTime)
+    // const ticksetEndDateStruct: NgbDateStruct = this.myDateService.fromModel(this.updateEventForm.ticketEndTime)
+    // this.ticketEndDate = ticksetEndDateStruct
+    // this.ticketEndTime = this.myTimeService.fromModel(this.updateEventForm.ticketEndTime)
 
     // Get cover img
     // if (this.event['coverPath']) {
@@ -106,7 +123,7 @@ export class EventPageDetailComponent implements OnInit {
       if (f.value.ticketEndDate) {
         const ticksetEndTimeText = this.utilsService.getDateTimeString(f.value.ticketEndDate, f.value.ticketEndTime)
         const ticksetEndTime = moment(ticksetEndTimeText, 'YYYY-MM-DD:hh-mm')
-        this.updateEventForm.ticketEndTime = ticksetEndTime.toISOString() 
+        this.updateEventForm.ticketEndTime = ticksetEndTime.toISOString()
       } else {
         this.updateEventForm.ticketEndTime = null
       }
@@ -116,13 +133,19 @@ export class EventPageDetailComponent implements OnInit {
       return
     }
 
+    // get ticket selling data
+    this.updateEventForm.ticketSellingList = this.editTicketSelling.getResult()
+
+    // Update event
     this.eventsService.updateEvent(this.eventId, this.updateEventForm).subscribe(data => {
       // this.getEvent();
       this.onUpdated.emit()
       this.isSaveSuccess = true
+      this.errorMsg = undefined
     },
     err => {
       console.error(err)
+      this.isSaveSuccess = false
       this.errorMsg = 'Cannot save'
     })
   }
