@@ -23,13 +23,12 @@ export class EditPerformTimeComponent implements OnInit {
     private myTimeService: MyTimeService) { }
 
   ngOnInit() {
-    console.log(this.performDateTimes);
     // this.utilsService.getDateTimeString
 
     this.performDateTimes.forEach((pd: any) => {
       const performDate = this.myDateService.fromModel(pd.datetime)
       const performTime = this.myTimeService.fromModel(pd.datetime)
-      
+
       const p: PerformDateTime = new PerformDateTime()
       p.date = performDate
       p.time = performTime

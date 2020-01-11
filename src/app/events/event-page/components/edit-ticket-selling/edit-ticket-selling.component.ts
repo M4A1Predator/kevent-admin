@@ -31,15 +31,27 @@ export class EditTicketSellingComponent implements OnInit {
       const tf = new TicketSellingForm()
       tf.approach = t.approach
       tf.note = t.note
-      // tf.ticketEndDate = this.myDateService.fromModel(t.ticketEndTime.)
+      tf.ticketStartDate = this.myDateService.fromModel(t.ticketStartTime.toISOString())
+      tf.ticketStartTime = this.myTimeService.fromModel(t.ticketStartTime.toISOString())
+
+      if (t.ticketEndTime) {
+        tf.ticketEndDate = this.myDateService.fromModel(t.ticketEndTime.toISOString())
+        tf.ticketEndTime = this.myTimeService.fromModel(t.ticketEndTime.toISOString())
+      }
       return tf
     })
 
-    this.ticketFormList.push(new TicketSellingForm())
+    if (!this.ticketFormList.length) {
+      this.ticketFormList.push(new TicketSellingForm())
+    }
   }
 
   addTickSelling() {
     this.ticketFormList.push(new TicketSellingForm())
+  }
+
+  removeTicketSelling(i: number) {
+    this.ticketFormList.splice(i, 1)
   }
 
   getResult(): TicketSelling[] {

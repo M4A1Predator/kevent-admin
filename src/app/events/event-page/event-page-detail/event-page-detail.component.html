@@ -161,7 +161,7 @@
         </div> -->
 
         <!-- Tick selling -->
-        <app-edit-ticket-selling></app-edit-ticket-selling>
+        <app-edit-ticket-selling [ticketSellingList]="updateEventForm.ticketSellingList"></app-edit-ticket-selling>
 
         <!-- Submit -->
         <button class="btn btn-primary panel-btn" type="submit" (click)="updateEvent(f)">Save</button>

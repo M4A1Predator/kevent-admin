@@ -70,30 +70,17 @@ export class EventPageDetailComponent implements OnInit {
     Object.assign(this.updateEventForm, this.event)
 
     // set ticket selling
-    this.updateEventForm.ticketSellingList = this.event.ticketSellingList.map(t => {
-      const data = {
-        ...t,
-        ticketStartTime: new Date(t.ticketStartTime)
-      }
-      if (t.ticketEndTime) {
-        data.ticketEndTime = new Date(t.ticketEndTime)
-      }
-      return data
-    })
-    console.log(this.updateEventForm);
-
-    // set date time fields
-    // const performDateStruct: NgbDateStruct = this.myDateService.fromModel(this.updateEventForm.performTime)
-    // this.performDate = performDateStruct
-    // this.performTime = this.myTimeService.fromModel(this.updateEventForm.performTime)
-
-    // const ticksetStartDateStruct: NgbDateStruct = this.myDateService.fromModel(this.updateEventForm.ticketStartTime)
-    // this.ticketStartDate = ticksetStartDateStruct
-    // this.ticketStartTime = this.myTimeService.fromModel(this.updateEventForm.ticketStartTime)
-
-    // const ticksetEndDateStruct: NgbDateStruct = this.myDateService.fromModel(this.updateEventForm.ticketEndTime)
-    // this.ticketEndDate = ticksetEndDateStruct
-    // this.ticketEndTime = this.myTimeService.fromModel(this.updateEventForm.ticketEndTime)
+    this.updateEventForm.ticketSellingList = this.event.ticketSellingList
+      .map(t => {
+        const data = {
+          ...t,
+          ticketStartTime: new Date(t.ticketStartTime)
+        }
+        if (t.ticketEndTime) {
+          data.ticketEndTime = new Date(t.ticketEndTime)
+        }
+        return data
+      })
 
     // Get cover img
     // if (this.event['coverPath']) {
