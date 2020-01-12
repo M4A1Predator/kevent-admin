@@ -6,15 +6,18 @@ import { Store } from '@ngrx/store'
 import { map, mergeMap, take } from 'rxjs/operators'
 import { AuthService } from '../auth/shared/auth.service'
 import { Observable, of } from 'rxjs'
-import { EventModel } from './shared/EventModel'
 import { ZoneRequest } from './shared/zone-request'
 import { UpdateEventForm } from './shared/UpdateEventForm'
+import { cloneDeep } from 'lodash'
+import { UtilsServiceService } from '../utils/utils-service.service'
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventsService {
-  constructor(private http: HttpClient, private store: Store<any>, private authService: AuthService) {}
+  constructor(private http: HttpClient, private store: Store<any>,
+    private authService: AuthService,
+    private utilsService: UtilsServiceService) {}
 
   getEvents() {
     return this.http.get(environment.API_URL + '/events')
@@ -46,6 +49,17 @@ export class EventsService {
   }
 
   updateEvent(eventId: string, eventModel: UpdateEventForm) {
+    // transform data
+    const data: any = cloneDeep(eventModel)
+    data['ticketSellingList'] = eventModel.ticketSellingList.map(t => {
+      const transformed: any = { ...t }
+      transformed.ticketStartTime = this.utilsService.covertDateToISOString(t.ticketStartTime)
+      if (t.ticketEndTime) {
+        transformed.ticketEndTime = this.utilsService.covertDateToISOString(t.ticketEndTime)
+      }
+      return transformed
+    })
+
     return this.authService.getAuth().pipe(mergeMap(auth => {
       const options = {
         headers: {
@@ -53,7 +67,7 @@ export class EventsService {
           Authorization: `${auth.data.token_type} ${auth.data.access_token}`
         }
       }
-      return this.http.put(environment.API_URL + '/events/' + eventId, eventModel, options)
+      return this.http.put(environment.API_URL + '/events/' + eventId, data, options)
     }))
   }
 
