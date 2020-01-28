@@ -49,7 +49,7 @@ import { EditTicketSellingComponent } from './events/event-page/components/edit-
 
 export const metaReducers: MetaReducer<any>[] = [debug]
 
-const initialState = loadData()
+// const initialState = loadData()
 
 @NgModule({
   declarations: [
@@ -87,7 +87,7 @@ const initialState = loadData()
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot(rootReducer, { initialState, metaReducers }),
+    StoreModule.forRoot(rootReducer, { initialState: {}, metaReducers }),
     EffectsModule.forRoot([AuthEffects]),
     FontAwesomeModule,
     FormsModule,

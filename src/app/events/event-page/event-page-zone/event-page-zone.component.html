@@ -18,7 +18,7 @@
         <textarea class="form-control" rows="3" [(ngModel)]="price" name="price"></textarea>
       </div>
     </div>
-    <button class="btn btn-primary panel-btn" type="submit" (click)="onUpdate(f)">Save</button>
+    <button class="btn btn-primary panel-btn" type="submit" (click)="onUpdate()">Save</button>
     <span *ngIf="errorMsg">{{ errorMsg }}</span>
   </form>
 </div>

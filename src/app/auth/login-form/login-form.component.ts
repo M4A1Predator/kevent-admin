@@ -12,7 +12,7 @@ export class LoginFormComponent implements OnInit {
   credential:LoginForm = new LoginForm()
 
   @Input()
-  private isLoading: Boolean = false;
+  isLoading: Boolean = false;
 
   @Input()
   errMsg: String = "";

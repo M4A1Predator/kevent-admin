@@ -1,7 +1,7 @@
 
 const keys = ['auth']
 
-export const loadData = () => {
+export function loadData() {
   try {
     const data = {}
     keys.forEach(key => {
@@ -11,6 +11,6 @@ export const loadData = () => {
     })
     return data
   } catch (error) {
-    return {};
+    return {}
   }
 }

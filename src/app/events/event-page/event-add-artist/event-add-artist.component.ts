@@ -11,14 +11,14 @@ import { EventArtist } from '../../shared/EventArtist';
 export class EventAddArtistComponent implements OnInit, DoCheck {
 
   @Output()
-  private onAdd: EventEmitter<any> = new EventEmitter()
+  onAdd: EventEmitter<any> = new EventEmitter()
 
   @Input()
   private existArtists: EventArtist[] = []
 
   private oldExistArtists: Artist[] = []
 
-  private artists: Artist[] = []
+  artists: Artist[] = []
   private allArtists: Artist[] = []
   private placedArtist: Artist
 

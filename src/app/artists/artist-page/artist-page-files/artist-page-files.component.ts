@@ -19,7 +19,7 @@ export class ArtistPageFilesComponent implements OnInit {
   @Output()
   updateAritst: EventEmitter<UpdateArtistForm> = new EventEmitter()
 
-  private msg: string
+  msg: string
 
   coverSrc: ArrayBuffer
 
