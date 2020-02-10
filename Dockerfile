@@ -4,9 +4,10 @@ WORKDIR /app
 
 COPY . .
 
+EXPOSE 8080
+
 RUN npm install && \
-    npm run build --prod
+    npm run build_prod
+RUN npm install --global lite-server
 
-FROM nginx:alpine
-
-COPY --from=builder /app/dist/* /usr/share/nginx/html/
+ENTRYPOINT ["lite-server"]
