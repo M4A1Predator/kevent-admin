@@ -1,27 +1,27 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser'
+import { NgModule } from '@angular/core'
+import { FormsModule } from '@angular/forms'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { HttpClientModule } from '@angular/common/http'
 
 // ngrx
-import { StoreModule, MetaReducer } from '@ngrx/store';
+import { StoreModule, MetaReducer } from '@ngrx/store'
 import { EffectsModule } from '@ngrx/effects'
-import { rootReducer } from './app.root-reducer';
-import { debug } from './reducer/meta-reducer'
+import { rootReducer } from './app.root-reducer'
+import { debug, localStorageSyncReducer } from './reducer/meta-reducer'
 import { AuthEffects } from './auth/auth.effects'
 import { loadData } from './storage/storage'
 
 // FA
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { AuthComponent } from './auth/auth.component';
-import { LoginFormComponent } from './auth/login-form/login-form.component';
-import { HeaderComponent } from './layout/header/header.component';
-import { LayoutComponent } from './layout/layout.component';
-import { HomeComponent } from './home/home.component';
+import { AppRoutingModule } from './app-routing.module'
+import { AppComponent } from './app.component'
+import { AuthComponent } from './auth/auth.component'
+import { LoginFormComponent } from './auth/login-form/login-form.component'
+import { HeaderComponent } from './layout/header/header.component'
+import { LayoutComponent } from './layout/layout.component'
+import { HomeComponent } from './home/home.component'
 import { SidebarComponent } from './layout/sidebar/sidebar.component'
 import { EventsPageComponent } from './events/events-page/events-page.component'
 import { EventListComponent } from './events/event-list/event-list.component'
@@ -40,14 +40,14 @@ import { EventPageDetailComponent } from './events/event-page/event-page-detail/
 import { EventAddArtistComponent } from './events/event-page/event-add-artist/event-add-artist.component'
 import { EventPageDangerComponent } from './events/event-page/event-page-danger/event-page-danger.component'
 import { EditPerformTimeComponent } from './events/event-page/components/edit-perform-time/edit-perform-time.component'
-import { ArtistDetailComponent } from './artists/artist-page/artist-detail/artist-detail.component';
-import { ImgUploaderComponent } from './events/event-page/components/img-uploader/img-uploader.component';
-import { ArtistDangerComponent } from './artists/artist-page/artist-danger/artist-danger.component';
-import { EventPageZoneComponent } from './events/event-page/event-page-zone/event-page-zone.component';
-import { ArtistPageFilesComponent } from './artists/artist-page/artist-page-files/artist-page-files.component';
+import { ArtistDetailComponent } from './artists/artist-page/artist-detail/artist-detail.component'
+import { ImgUploaderComponent } from './events/event-page/components/img-uploader/img-uploader.component'
+import { ArtistDangerComponent } from './artists/artist-page/artist-danger/artist-danger.component'
+import { EventPageZoneComponent } from './events/event-page/event-page-zone/event-page-zone.component'
+import { ArtistPageFilesComponent } from './artists/artist-page/artist-page-files/artist-page-files.component'
 import { EditTicketSellingComponent } from './events/event-page/components/edit-ticket-selling/edit-ticket-selling.component'
 
-export const metaReducers: MetaReducer<any>[] = [debug]
+export const metaReducers: MetaReducer<any>[] = [debug, localStorageSyncReducer]
 
 // const initialState = loadData()
 
