@@ -97,6 +97,7 @@ export class EventPageDetailComponent implements OnInit {
     this.updateEventForm.description = f.value.description
     this.updateEventForm.location = f.value.location
     this.updateEventForm.performDateTimeList = this.editTime.getResult()
+    this.updateEventForm.onlineDetail = f.value.onlineDetail
 
     try {
       if (f.value.ticketStartDate) {

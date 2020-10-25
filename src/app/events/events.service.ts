@@ -50,6 +50,7 @@ export class EventsService {
 
   updateEvent(eventId: string, eventModel: UpdateEventForm) {
     // transform data
+    console.log(eventModel)
     const data: any = cloneDeep(eventModel)
     data['ticketSellingList'] = eventModel.ticketSellingList.map(t => {
       const transformed: any = { ...t }
