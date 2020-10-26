@@ -24,7 +24,7 @@ export class EventPageDetailComponent implements OnInit {
   eventId: string
   @Input()
   public event: EventModel
-  updateEventForm: UpdateEventForm
+  public updateEventForm: UpdateEventForm
   performDate: NgbDateStruct
   performTime: NgbTimeStruct
   ticketStartDate: NgbDateStruct
@@ -38,6 +38,8 @@ export class EventPageDetailComponent implements OnInit {
 
   errorMsg: string
   isSaveSuccess: boolean
+
+  public onlineDetail: string
 
   @Output()
   onUpdated: EventEmitter<any> = new EventEmitter<any>()

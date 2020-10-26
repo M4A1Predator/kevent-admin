@@ -46,6 +46,7 @@ import { ArtistDangerComponent } from './artists/artist-page/artist-danger/artis
 import { EventPageZoneComponent } from './events/event-page/event-page-zone/event-page-zone.component'
 import { ArtistPageFilesComponent } from './artists/artist-page/artist-page-files/artist-page-files.component'
 import { EditTicketSellingComponent } from './events/event-page/components/edit-ticket-selling/edit-ticket-selling.component'
+import { CKEditorModule } from 'ckeditor4-angular'
 
 export const metaReducers: MetaReducer<any>[] = [debug, localStorageSyncReducer]
 
@@ -92,6 +93,7 @@ export const metaReducers: MetaReducer<any>[] = [debug, localStorageSyncReducer]
     FontAwesomeModule,
     FormsModule,
     NgbModule,
+    CKEditorModule,
     KConfigModule
   ],
   providers: [],
